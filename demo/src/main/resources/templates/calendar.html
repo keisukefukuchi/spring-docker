@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Calendar</title>
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyUmpa0p6L9UV4qzjazZ0i0P3F9KbbWkJ"
+          crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container mt-3">
+    <!-- 検索バー -->
+    <form action="#" th:action="@{/calendar}" th:object="${searchForm}" method="post">
+        <div class="input-group mb-3">
+            <input type="month" class="form-control" th:field="*{yearMonth}" placeholder="YYYY-MM" pattern="\d{4}-\d{2}" title="Enter a date in the format YYYY-MM">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit">検索</button>
+            </div>
+        </div>
+    </form>
+
+
+    <!-- カレンダー表示 -->
+    <h2 th:text="${yearMonth}"></h2>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th th:text="${dates}"></th>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>
