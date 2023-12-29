@@ -39,7 +39,7 @@ public class CalendarController {
             dates.add(firstDay.format(formatter));
             firstDay = firstDay.plusDays(1);
         }
-
+        System.out.println(dates);
         model.addAttribute("yearMonth", yearMonth);
         model.addAttribute("dates", dates);
         return "calendar";
