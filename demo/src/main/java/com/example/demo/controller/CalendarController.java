@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.time.YearMonth;
@@ -24,8 +25,17 @@ public class CalendarController {
     @PostMapping("/calendar")
     public String searchCalendar(SearchForm searchForm, Model model) {
         YearMonth yearMonth = YearMonth.parse(searchForm.getYearMonth().toString());
-        System.out.println(yearMonth);
         return populateCalendar(model, yearMonth);
+    }
+
+    @PostMapping("/expense")
+    public String handleDateClick(@RequestParam String selectedDate) {
+        // 日付が正常に受信されたときの処理
+        System.out.println("クリックされた日付: " + selectedDate);
+
+        // ここで必要な処理を追加
+
+        return "expense";
     }
 
     private String populateCalendar(Model model, YearMonth yearMonth) {
@@ -39,7 +49,6 @@ public class CalendarController {
             dates.add(firstDay.format(formatter));
             firstDay = firstDay.plusDays(1);
         }
-        System.out.println(dates);
         model.addAttribute("yearMonth", yearMonth);
         model.addAttribute("dates", dates);
         return "calendar";
