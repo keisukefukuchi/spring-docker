@@ -33,19 +33,14 @@ public class CalendarController {
 
     @GetMapping("/")
     public String showCalendar(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
         return "calendar";
     }
 
-    @GetMapping("/expense")
-    public String handleDateClick(@RequestParam String selectedDate, Model model) {
-        // 日付が正常に受信されたときの処理
-        System.out.println("受け取ったデータ: " + selectedDate);
-        // ページに表示するデータを設定
-        System.out.println(categoryService.getAllCategories());
-        model.addAttribute("selectedDate", selectedDate);
-        model.addAttribute("categories", categoryService.getAllCategories());
-        model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
-        return "expense";
+    @PostMapping("/expense")
+    public String handleDateClick() {
+        return "aaaa";
     }
 }
 

@@ -1,56 +1,72 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Calendar</title>
 
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/dist/main.min.css'></script>
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js'></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/dist/main.min.css"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
-    <link th:href="@{/css/calendar.css}" rel="stylesheet">
-</head>
-<body>
+    <link th:href="@{/css/calendar.css}" rel="stylesheet" />
+  </head>
+  <body>
     <div class="container mt-3">
-        <!-- カレンダー表示 -->
-        <div class="calendar" id="calendar"></div>
-        <div class="modal" tabindex="-1" role="dialog" id="expenseModal">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <!-- フォームはここに配置 -->
-                        <form class="expense-form" id="expenseForm" action="/expense" method="post">
-                            <h2 class="expense-title">出金 登録</h2>
-                            <!-- Expense Name -->
-                            <label for="expenseName">出金名</label>
-                            <input type="text" id="expenseName" name="name" required>
+      <!-- カレンダー表示 -->
+      <div class="calendar" id="calendar"></div>
+      <div class="modal" tabindex="-1" role="dialog" id="expenseModal">
+        <div class="modal-content">
+          <div class="modal-body">
+            <!-- フォームはここに配置 -->
+            <form
+              class="expense-form"
+              id="expenseForm"
+              action="/expense"
+              method="post"
+            >
+              <h2 class="expense-title">出金 登録</h2>
 
-                            <!-- Expense Category -->
-                            <label for="expenseCategory">カテゴリー</label>
-                            <select id="expenseCategory" name="categoryId" required th:options="${categories}">
-                                <option value="">Select Category</option>
-                            </select>
+              <label
+                for="expenseDate"
+                th:value="${selectedDate}"
+                th:text="${selectedDate}"
+              >登録日</label>
+              <input type="date" id="expenseDate" name="date" required />
 
-                            <!-- Payment Type -->
-                            <label for="paymentType">支払い系統</label>
-                            <select id="paymentType" name="paymentTypeId" required th:options="${paymentTypes}">
-                                <option value="">Select Payment Type</option>
-                            </select>
+              <!-- Expense Name -->
+              <label for="expenseName">出金名</label>
+              <input type="text" id="expenseName" name="name" required />
 
-                            <!-- Expense Amount -->
-                            <label for="expenseAmount">料金</label>
-                            <input type="number" id="expenseAmount" name="price" required>
+              <!-- Expense Category -->
+              <label for="expenseCategory">カテゴリー</label>
+              <select
+                id="expenseCategory"
+                name="categoryId"
+                required
+                th:options="${categories}"
+              >
+                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+              </select>
 
-                            <!-- Expense Date -->
-                            <label for="expenseDate" th:value="${selectedDate}" th:text="${selectedDate}"></label>
-                            <input type="date" id="expenseDate" name="date" required>
+              <!-- Payment Type -->
+              <label for="paymentType">支払い系統</label>
+              <select
+                id="paymentType"
+                name="paymentTypeId"
+                required
+                th:options="${paymentTypes}"
+              >
+                <option th:each="paymentType : ${paymentTypes}" th:value="${paymentType.id}" th:text="${paymentType.name}"></option>
+              </select>
 
-                            <!-- Add other necessary fields -->
-
-                            <button type="submit">登録</button>
-                        </form>
-                    </div>
+              <!-- Expense Amount -->
+              <label for="expenseAmount">料金</label>
+              <input type="number" id="expenseAmount" name="price" required />
+              <button type="submit">登録</button>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
 
-
     <script th:src="@{/js/calendar.js}"></script>
-</body>
+  </body>
 </html>

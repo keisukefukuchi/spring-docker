@@ -53,28 +53,4 @@ document.addEventListener("DOMContentLoaded", function () {
       sendDataToSpringBoot(dateInput.value);
       modal.style.display = "none";
     });
-
-  function sendDataToSpringBoot(selectedDate) {
-    // リクエストデータを作成
-    let url = "/expense?selectedDate=" + encodeURIComponent(selectedDate);
-
-    // GETリクエストを送信
-    fetch(url)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.text();
-      })
-      .then((data) => {
-        // ページを切り替える
-        window.location.href = url;
-      })
-      .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
-      });
-  }
 });
