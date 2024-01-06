@@ -2,44 +2,101 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Expense Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 400px;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        p {
+            text-align: center;
+            margin-top: 20px;
+            color: #888;
+        }
+    </style>
 </head>
 <body>
-<h2>Expense Registration</h2>
+<h2>出金　登録</h2>
 
-<form action="/registerExpense" method="post">
+<form action="/expense" method="post">
 
     <!-- Expense Name -->
-    <label for="expenseName">Expense Name:</label>
-    <input type="text" id="expenseName" name="name" required><br>
+    <label for="expenseName">出金名</label>
+    <input type="text" id="expenseName" name="name" required>
 
-    <!-- Expense Category (assuming you have a list of categories in your controller) -->
-    <label for="expenseCategory">Expense Category:</label>
+    <!-- Expense Category -->
+    <label for="expenseCategory">カテゴリー</label>
     <select id="expenseCategory" name="categoryId" required th:options="${categories}">
         <option value="">Select Category</option>
-    </select><br>
+    </select>
 
-    <!-- Payment Type (assuming you have a list of payment types in your controller) -->
-    <label for="paymentType">Payment Type:</label>
+    <!-- Payment Type -->
+    <label for="paymentType">支払い系統</label>
     <select id="paymentType" name="paymentTypeId" required th:options="${paymentTypes}">
         <option value="">Select Payment Type</option>
-    </select><br>
+    </select>
 
     <!-- Expense Amount -->
-    <label for="expenseAmount">Expense Amount:</label>
-    <input type="number" id="expenseAmount" name="price" required><br>
+    <label for="expenseAmount">料金</label>
+    <input type="number" id="expenseAmount" name="price" required>
 
     <!-- Expense Date -->
-    <label for="expenseDate">Expense Date:</label>
-    <input type="date" id="expenseDate" name="date" required><br>
+    <label for="expenseDate" th:value="${selectedDate}" th:text="${selectedDate}"></label>
+    <input type="date" id="expenseDate" name="date" required>
 
     <!-- Add other necessary fields -->
 
-    <button type="submit">Register Expense</button>
+    <button type="submit">登録</button>
 </form>
-
-<p>Selected Date: <span th:text="${selectedDate}"></span></p>
-
-<!-- Other necessary displays or forms -->
 
 </body>
 </html>
