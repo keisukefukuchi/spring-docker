@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Expense Page</title>
+</head>
+<body>
+<h2>Expense Registration</h2>
+
+<form action="/registerExpense" method="post">
+
+    <!-- Expense Name -->
+    <label for="expenseName">Expense Name:</label>
+    <input type="text" id="expenseName" name="name" required><br>
+
+    <!-- Expense Category (assuming you have a list of categories in your controller) -->
+    <label for="expenseCategory">Expense Category:</label>
+    <select id="expenseCategory" name="categoryId" required th:options="${categories}">
+        <option value="">Select Category</option>
+    </select><br>
+
+    <!-- Payment Type (assuming you have a list of payment types in your controller) -->
+    <label for="paymentType">Payment Type:</label>
+    <select id="paymentType" name="paymentTypeId" required th:options="${paymentTypes}">
+        <option value="">Select Payment Type</option>
+    </select><br>
+
+    <!-- Expense Amount -->
+    <label for="expenseAmount">Expense Amount:</label>
+    <input type="number" id="expenseAmount" name="price" required><br>
+
+    <!-- Expense Date -->
+    <label for="expenseDate">Expense Date:</label>
+    <input type="date" id="expenseDate" name="date" required><br>
+
+    <!-- Add other necessary fields -->
+
+    <button type="submit">Register Expense</button>
+</form>
+
+<p>Selected Date: <span th:text="${selectedDate}"></span></p>
+
+<!-- Other necessary displays or forms -->
+
+</body>
+</html>

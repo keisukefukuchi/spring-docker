@@ -28,13 +28,15 @@ public class CalendarController {
         return populateCalendar(model, yearMonth);
     }
 
-    @PostMapping("/expense")
-    public String handleDateClick(@RequestParam String selectedDate) {
+    @GetMapping("/expense")
+    public String handleDateClick(@RequestParam String selectedDate, Model model) {
         // 日付が正常に受信されたときの処理
-        System.out.println("クリックされた日付: " + selectedDate);
+        System.out.println("受け取ったデータ: " + selectedDate);
 
-        // ここで必要な処理を追加
-
+        // ページに表示するデータを設定
+        model.addAttribute("selectedDate", selectedDate);
+//        model.addAttribute("categories", categoryService.getAllCategories());
+//        model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
         return "expense";
     }
 

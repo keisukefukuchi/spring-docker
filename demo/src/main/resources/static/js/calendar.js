@@ -31,20 +31,22 @@ document.addEventListener('DOMContentLoaded', function() {
     calendar.render();
 
     function sendDataToSpringBoot(selectedDate) {
-        // Ajaxリクエストを作成
-        let xhr = new XMLHttpRequest();
+        // リクエストデータを作成
         let url = '/expense?selectedDate=' + encodeURIComponent(selectedDate);
-        // リクエストをオープン
-        xhr.open('POST', url, true);
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
-        // レスポンスが返ってきたときの処理
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // レスポンスが成功の場合の処理
-                console.log('データが正常に送信されました');
-            }
-        };
-        // リクエストを送信
-        xhr.send();
+        // GETリクエストを送信
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    // レスポンスのHTMLを現在のページに挿入
+                    document.body.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
     }
 });
