@@ -6,10 +6,30 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/dist/main.min.css"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.10/index.global.min.js"></script>
 
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/calendar.css}" rel="stylesheet" />
   </head>
   <body>
-    <div class="container mt-3">
+    <header class="header">
+      <a th:href="@{/}"> 家計簿アプリ </a>
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li class="header-nav-item"><a th:href="@{/}">ホーム</a></li>
+          <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
+          <li class="header-nav-item"><a th:href="@{/category}">カテゴリー</a></li>
+          <li class="header-nav-item"><a th:href="@{/payment-type}">支払い系統</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <div class="month-money">
+        <div class="month-expense">
+          <h3>出金額</h3>
+        </div>
+        <div class="month-income">
+          <h3>入金額</h3>
+        </div>
+      </div>
       <!-- カレンダー表示 -->
       <div class="calendar" id="calendar"></div>
       <div class="modal" tabindex="-1" role="dialog" id="expenseModal">
@@ -23,12 +43,18 @@
               method="post"
             >
               <h2 class="expense-title">出金 登録</h2>
+              <div class="menu" id="menu">
+                <span class="menu__line--top"></span>
+                <span class="menu__line--middle"></span>
+                <span class="menu__line--bottom"></span>
+              </div>
 
               <label
                 for="expenseDate"
                 th:value="${selectedDate}"
                 th:text="${selectedDate}"
-              >登録日</label>
+                >登録日</label
+              >
               <input type="date" id="expenseDate" name="date" required />
 
               <!-- Expense Name -->
@@ -43,7 +69,11 @@
                 required
                 th:options="${categories}"
               >
-                <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
+                <option
+                  th:each="category : ${categories}"
+                  th:value="${category.id}"
+                  th:text="${category.name}"
+                ></option>
               </select>
 
               <!-- Payment Type -->
@@ -54,7 +84,11 @@
                 required
                 th:options="${paymentTypes}"
               >
-                <option th:each="paymentType : ${paymentTypes}" th:value="${paymentType.id}" th:text="${paymentType.name}"></option>
+                <option
+                  th:each="paymentType : ${paymentTypes}"
+                  th:value="${paymentType.id}"
+                  th:text="${paymentType.name}"
+                ></option>
               </select>
 
               <!-- Expense Amount -->

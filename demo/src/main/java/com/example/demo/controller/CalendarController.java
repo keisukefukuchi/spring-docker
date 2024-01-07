@@ -42,5 +42,17 @@ public class CalendarController {
     public String handleDateClick() {
         return "aaaa";
     }
+
+    @GetMapping("/category")
+    public String showCategory(Model model) {
+        model.addAttribute("categories", categoryService.getAllCategories());
+        return "category";
+    }
+
+    @GetMapping("/payment-type")
+    public String showPaymentType(Model model) {
+        model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
+        return "paymentType";
+    }
 }
 

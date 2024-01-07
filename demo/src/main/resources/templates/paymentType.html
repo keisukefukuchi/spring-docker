@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>PaymentType List</title>
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/paymentType.css}" rel="stylesheet" />
+</head>
+<body>
+<div class="header">
+    <a th:href="@{/}"> 家計簿アプリ </a>
+    <nav class="header-nav">
+        <ul class="header-nav-list">
+            <li class="header-nav-item"><a th:href="@{/}">ホーム</a></li>
+            <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
+            <li class="header-nav-item"><a th:href="@{/category}">カテゴリー</a></li>
+            <li class="header-nav-item"><a th:href="@{/payment-type}">支払い系統</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="container">
+    <div class="payment-type-header">
+        <h1 class="payment-type-title">支払い系統一覧</h1>
+
+        <div class="payment-type-register-button">
+            <!-- Add New PaymentType Button -->
+            <a th:href="@{/addPaymentType}" class="btn btn-success">追加</a>
+        </div>
+    </div>
+
+
+    <!-- Display the list of categories -->
+    <ul th:each="paymentType : ${paymentTypes}">
+        <li class="payment-type-list">
+            <p th:text="${paymentType.name}"></p>
+
+            <div class="payment-type-buttons">
+                <!-- Edit Button -->
+                <!-- Delete Button -->
+                <form th:action="@{'/editPaymentType/' + ${paymentType.id}}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-primary">編集</button>
+                </form>
+
+                <!-- Delete Button -->
+                <form th:action="@{'/deletePaymentType/' + ${paymentType.id}}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure?')">削除</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>
