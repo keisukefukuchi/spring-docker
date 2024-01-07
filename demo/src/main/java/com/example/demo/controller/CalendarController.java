@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Category;
+import com.example.demo.entity.PaymentType;
 import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +60,17 @@ public class CalendarController {
 
     @GetMapping("/payment-type")
     public String showPaymentType(Model model) {
+        model.addAttribute("paymentType", new PaymentType());
         model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
         return "paymentType";
+    }
+
+    @PostMapping("/payment-type")
+    public String addPaymentType(@ModelAttribute PaymentType paymentType) {
+        paymentType.setCreatedAt(LocalDate.now());
+        paymentType.setUpdatedAt(LocalDate.now());
+        paymentTypeService.savePaymentType(paymentType);
+        return "redirect:/payment-type";
     }
 }
 

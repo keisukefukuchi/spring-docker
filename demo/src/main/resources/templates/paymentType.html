@@ -45,7 +45,7 @@
             <!-- Edit Button -->
             <!-- Delete Button -->
             <form
-              th:action="@{'/editPaymentType/' + ${paymentType.id}}"
+              th:action="@{'/editPaymentType/' + ${paymentType.paymentTypeId}}"
               method="post"
               style="display: inline"
             >
@@ -54,7 +54,7 @@
 
             <!-- Delete Button -->
             <form
-              th:action="@{'/deletePaymentType/' + ${paymentType.id}}"
+              th:action="@{'/deletePaymentType/' + ${paymentType.paymentTypeId}}"
               method="post"
               style="display: inline"
             >
@@ -77,12 +77,13 @@
             <span id="closeBtn" class="closeBtn batsu"></span>
             <form
               class="payment-type-form"
-              th:action="@{/add/payment-type}"
+              th:action="@{/payment-type}"
+              th:object="${paymentType}"
               method="post"
             >
               <!-- Name field -->
               <label for="name">支払い系統名:</label>
-              <input type="text" id="name" name="name" required />
+              <input type="text" id="name" th:field="*{name}" required />
 
               <div class="button-position">
                 <!-- Submit button -->
