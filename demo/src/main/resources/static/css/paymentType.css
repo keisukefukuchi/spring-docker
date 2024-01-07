@@ -6,7 +6,7 @@
 .payment-type-header {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 50px
+    margin-bottom: 30px
 }
 
 .payment-type-title {
