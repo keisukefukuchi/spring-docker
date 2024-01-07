@@ -3,7 +3,6 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDate;
 import java.util.UUID;
@@ -13,15 +12,18 @@ import java.util.UUID;
 @Setter
 public class Expense {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @GeneratedValue
+    @Column(columnDefinition = "CHAR(36)")
     private UUID id;
+
     @ManyToOne()
-    @JoinColumn(name = "category_id", referencedColumnName = "id")
+    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
+
     @ManyToOne()
     @JoinColumn(name = "paymentType_id", referencedColumnName = "id")
     private PaymentType PaymentType;
+
     private int price;
     private String name;
     private LocalDate date;

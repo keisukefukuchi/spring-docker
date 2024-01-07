@@ -45,7 +45,7 @@
             <!-- Edit Button -->
             <!-- Delete Button -->
             <form
-              th:action="@{'/editCategory/' + ${category.id}}"
+              th:action="@{'/editCategory/' + ${category.categoryId}}"
               method="post"
               style="display: inline"
             >
@@ -54,7 +54,7 @@
 
             <!-- Delete Button -->
             <form
-              th:action="@{'/deleteCategory/' + ${category.id}}"
+              th:action="@{'/deleteCategory/' + ${category.categoryId}}"
               method="post"
               style="display: inline"
             >
@@ -77,12 +77,13 @@
             <span id="closeBtn" class="closeBtn batsu"></span>
             <form
               class="category-form"
-              th:action="@{/add/category}"
+              th:action="@{/category}"
+              th:object="${category}"
               method="post"
             >
               <!-- Name field -->
               <label for="name">カテゴリー名:</label>
-              <input type="text" id="name" name="name" required />
+              <input type="text" id="name" th:field="*{name}" required />
 
               <div class="button-position">
                 <!-- Submit button -->

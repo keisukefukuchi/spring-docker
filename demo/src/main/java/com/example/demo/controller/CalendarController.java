@@ -1,20 +1,19 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.SearchForm;
+import com.example.demo.entity.Category;
 import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import java.nio.ByteBuffer;
 import java.time.LocalDate;
-import java.time.YearMonth;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
+import java.util.UUID;
 
 @Controller
 public class CalendarController {
@@ -45,8 +44,17 @@ public class CalendarController {
 
     @GetMapping("/category")
     public String showCategory(Model model) {
+        model.addAttribute("category", new Category());
         model.addAttribute("categories", categoryService.getAllCategories());
         return "category";
+    }
+
+    @PostMapping("/category")
+    public String addCategory(@ModelAttribute Category category) {
+        category.setCreatedAt(LocalDate.now());
+        category.setUpdatedAt(LocalDate.now());
+        categoryService.saveCategory(category);
+        return "redirect:/category";
     }
 
     @GetMapping("/payment-type")
