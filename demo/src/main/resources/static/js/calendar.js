@@ -16,11 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     dateClick: function (info) {
       // モーダルを表示
       modal.style.display = "flex";
-
       // クリックされた日付をフォームの入力に設定
       dateInput.value = info.dateStr;
-      // Spring Bootにデータを送信するためのAjaxリクエスト
-      // sendDataToSpringBoot(info.dateStr);
+
     },
     buttonText: { month: "月" },
     buttonHints: {
@@ -50,13 +48,4 @@ document.addEventListener("DOMContentLoaded", function () {
   closeBtn.addEventListener("click", () => {
     modal.style.display = "none";
   });
-
-  // フォームが送信されたときにSpring Bootにデータを送信するイベントリスナーを追加
-  document
-    .getElementById("expenseForm")
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      sendDataToSpringBoot(dateInput.value);
-      modal.style.display = "none";
-    });
 });

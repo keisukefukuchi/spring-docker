@@ -1,8 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.Category;
+import com.example.demo.entity.Expense;
 import com.example.demo.entity.PaymentType;
 import com.example.demo.service.category.CategoryService;
+import com.example.demo.service.expense.ExpenseService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,37 +12,49 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import java.nio.ByteBuffer;
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.UUID;
 
 @Controller
 public class CalendarController {
 
+    private final ExpenseService expenseService;
     private final CategoryService categoryService;
     private final PaymentTypeService paymentTypeService;
 
     @Autowired
     public CalendarController(
+            ExpenseService expenseService,
             CategoryService categoryService,
             PaymentTypeService paymentTypeService
     ) {
+        this.expenseService = expenseService;
         this.categoryService = categoryService;
         this.paymentTypeService = paymentTypeService;
     }
 
     @GetMapping("/")
     public String showCalendar(Model model) {
+        model.addAttribute("expense", new Expense());
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
         return "calendar";
     }
 
     @PostMapping("/expense")
-    public String handleDateClick() {
-        return "aaaa";
+    public String addExpense(
+            @ModelAttribute Expense expense,
+            @RequestParam("categoryId") UUID categoryId,
+            @RequestParam("paymentTypeId") UUID paymentTypeId
+    ) {
+        expense.setCreatedAt(LocalDate.now());
+        expense.setUpdatedAt(LocalDate.now());
+        expense.setCategoryId(categoryId);
+        expense.setPaymentTypeId(paymentTypeId);
+        expenseService.saveExpense(expense);
+        return "redirect:/";
     }
 
     @GetMapping("/category")

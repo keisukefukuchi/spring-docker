@@ -45,7 +45,8 @@
             <form
               class="expense-form"
               id="expenseForm"
-              action="/expense"
+              th:action="@{/expense}"
+              th:object="${expense}"
               method="post"
             >
               <label
@@ -54,11 +55,11 @@
                 th:text="${selectedDate}"
                 >登録日</label
               >
-              <input type="date" id="expenseDate" name="date" required />
+              <input type="date" id="expenseDate" th:field="*{date}" required />
 
               <!-- Expense Name -->
               <label for="expenseName">出金名</label>
-              <input type="text" id="expenseName" name="name" required />
+              <input type="text" id="expenseName" th:field="*{name}" required />
 
               <!-- Expense Category -->
               <label for="expenseCategory">カテゴリー</label>
@@ -92,7 +93,7 @@
 
               <!-- Expense Amount -->
               <label for="expenseAmount">料金</label>
-              <input type="number" id="expenseAmount" name="price" required />
+              <input type="number" id="expenseAmount" th:field="*{price}" required />
               <div class="button-position">
                 <button type="submit">登録</button>
               </div>

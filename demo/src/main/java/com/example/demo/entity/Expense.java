@@ -17,13 +17,11 @@ public class Expense {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID expenseId;
 
-    @ManyToOne()
-    @JoinColumn(name = "category_id", referencedColumnName = "category_id")
-    private Category category;
+    @Column(name = "category_id")
+    private UUID categoryId;
 
-    @ManyToOne()
-    @JoinColumn(name = "payment_type_id", referencedColumnName = "payment_type_id")
-    private PaymentType paymentType;
+    @Column(name = "payment_type_id")
+    private UUID paymentTypeId;
 
     @Column(name = "price")
     private int price;
