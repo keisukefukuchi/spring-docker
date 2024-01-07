@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let calendarEl = document.getElementById("calendar");
   let modal = document.getElementById("expenseModal");
   let dateInput = document.getElementById("expenseDate");
+  const closeBtn = document.getElementById("closeBtn");
+
   let calendar = new FullCalendar.Calendar(calendarEl, {
     locale: "ja",
     height: "auto",
@@ -45,6 +47,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+closeBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
+
   // フォームが送信されたときにSpring Bootにデータを送信するイベントリスナーを追加
   document
     .getElementById("expenseForm")
@@ -54,3 +60,4 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.style.display = "none";
     });
 });
+

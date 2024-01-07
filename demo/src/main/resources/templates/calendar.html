@@ -34,6 +34,7 @@
       <div class="calendar" id="calendar"></div>
       <div class="modal" tabindex="-1" role="dialog" id="expenseModal">
         <div class="modal-content">
+          <span id="closeBtn" class="closeBtn batsu"></span>
           <div class="modal-body">
             <!-- フォームはここに配置 -->
             <form
@@ -43,11 +44,6 @@
               method="post"
             >
               <h2 class="expense-title">出金 登録</h2>
-              <div class="menu" id="menu">
-                <span class="menu__line--top"></span>
-                <span class="menu__line--middle"></span>
-                <span class="menu__line--bottom"></span>
-              </div>
 
               <label
                 for="expenseDate"
@@ -94,7 +90,9 @@
               <!-- Expense Amount -->
               <label for="expenseAmount">料金</label>
               <input type="number" id="expenseAmount" name="price" required />
-              <button type="submit">登録</button>
+              <div class="button-position">
+                <button type="submit">登録</button>
+              </div>
             </form>
           </div>
         </div>
