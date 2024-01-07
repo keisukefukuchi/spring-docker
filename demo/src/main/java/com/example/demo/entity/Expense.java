@@ -10,23 +10,33 @@ import java.util.UUID;
 @Entity
 @Getter
 @Setter
+@Table(name = "expenses")
 public class Expense {
     @Id
-    @GeneratedValue
-    @Column(columnDefinition = "CHAR(36)")
-    private UUID id;
+    @Column(name = "expense_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID expenseId;
 
     @ManyToOne()
     @JoinColumn(name = "category_id", referencedColumnName = "category_id")
     private Category category;
 
     @ManyToOne()
-    @JoinColumn(name = "paymentType_id", referencedColumnName = "id")
-    private PaymentType PaymentType;
+    @JoinColumn(name = "payment_type_id", referencedColumnName = "payment_type_id")
+    private PaymentType paymentType;
 
+    @Column(name = "price")
     private int price;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "date")
     private LocalDate date;
+
+    @Column(name = "created_at")
     private LocalDate createdAt;
+
+    @Column(name = "updated_at")
     private LocalDate updatedAt;
 }

@@ -71,7 +71,7 @@
               >
                 <option
                   th:each="category : ${categories}"
-                  th:value="${category.id}"
+                  th:value="${category.categoryId}"
                   th:text="${category.name}"
                 ></option>
               </select>
@@ -86,7 +86,7 @@
               >
                 <option
                   th:each="paymentType : ${paymentTypes}"
-                  th:value="${paymentType.id}"
+                  th:value="${paymentType.paymentTypeId}"
                   th:text="${paymentType.name}"
                 ></option>
               </select>
