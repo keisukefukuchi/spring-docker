@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-closeBtn.addEventListener("click", () => {
-  modal.style.display = "none";
-});
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
 
   // フォームが送信されたときにSpring Bootにデータを送信するイベントリスナーを追加
   document
@@ -60,4 +60,3 @@ closeBtn.addEventListener("click", () => {
       modal.style.display = "none";
     });
 });
-

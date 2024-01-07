@@ -16,8 +16,12 @@
         <ul class="header-nav-list">
           <li class="header-nav-item"><a th:href="@{/}">ホーム</a></li>
           <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
-          <li class="header-nav-item"><a th:href="@{/category}">カテゴリー</a></li>
-          <li class="header-nav-item"><a th:href="@{/payment-type}">支払い系統</a></li>
+          <li class="header-nav-item">
+            <a th:href="@{/category}">カテゴリー</a>
+          </li>
+          <li class="header-nav-item">
+            <a th:href="@{/payment-type}">支払い系統</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -34,6 +38,7 @@
       <div class="calendar" id="calendar"></div>
       <div class="modal" tabindex="-1" role="dialog" id="expenseModal">
         <div class="modal-content">
+          <h2 class="expense-title">出金 登録</h2>
           <span id="closeBtn" class="closeBtn batsu"></span>
           <div class="modal-body">
             <!-- フォームはここに配置 -->
@@ -43,8 +48,6 @@
               action="/expense"
               method="post"
             >
-              <h2 class="expense-title">出金 登録</h2>
-
               <label
                 for="expenseDate"
                 th:value="${selectedDate}"
