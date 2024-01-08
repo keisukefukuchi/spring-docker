@@ -10,7 +10,6 @@
     <a th:href="@{/}"> 家計簿アプリ </a>
     <nav class="header-nav">
         <ul class="header-nav-list">
-            <li class="header-nav-item"><a th:href="@{/}">ホーム</a></li>
             <li class="header-nav-item"><a th:href="@{/expense}">出金</a></li>
             <li class="header-nav-item"><a th:href="@{/income}">入金</a></li>
             <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
@@ -96,7 +95,7 @@
                     <input type="text" id="name" th:field="*{name}" required />
                     <!-- Expense Amount -->
                     <label for="incomeAmount">料金</label>
-                    <input type="number" id="incomeAmount" th:field="*{price} 円" required />
+                    <input type="number" id="incomeAmount" th:field="*{price}" required />
                     <div class="button-position">
                         <!-- Submit button -->
                         <button type="submit">追加</button>
