@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Expense;
 import com.example.demo.entity.PaymentType;
+import com.example.demo.model.DailySummary;
 import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.expense.ExpenseService;
 import com.example.demo.service.paymentType.PaymentTypeService;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Controller
@@ -49,8 +51,6 @@ public class CalendarController {
             @RequestParam("categoryId") UUID categoryId,
             @RequestParam("paymentTypeId") UUID paymentTypeId
     ) {
-        expense.setCreatedAt(LocalDate.now());
-        expense.setUpdatedAt(LocalDate.now());
         expense.setCategoryId(categoryId);
         expense.setPaymentTypeId(paymentTypeId);
         expenseService.saveExpense(expense);
@@ -66,8 +66,6 @@ public class CalendarController {
 
     @PostMapping("/category")
     public String addCategory(@ModelAttribute Category category) {
-        category.setCreatedAt(LocalDate.now());
-        category.setUpdatedAt(LocalDate.now());
         categoryService.saveCategory(category);
         return "redirect:/category";
     }
@@ -81,8 +79,6 @@ public class CalendarController {
 
     @PostMapping("/payment-type")
     public String addPaymentType(@ModelAttribute PaymentType paymentType) {
-        paymentType.setCreatedAt(LocalDate.now());
-        paymentType.setUpdatedAt(LocalDate.now());
         paymentTypeService.savePaymentType(paymentType);
         return "redirect:/payment-type";
     }

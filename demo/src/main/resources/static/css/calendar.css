@@ -14,7 +14,8 @@
 .month-expense,
 .month-income {
     text-align: center;
-    margin: 10px; /* Adjust margin as needed */
+    margin: 10px;
+    /* Adjust margin as needed */
 }
 
 .month-expense,
@@ -225,4 +226,20 @@
 
 .button-position {
     text-align: right;
+}
+
+.fc-event-title:hover {
+    /* ホバー時のスタイルを無効にする */
+    background-color: inherit;
+    color: inherit;
+    text-decoration: none;
+}
+
+.fc-h-event .fc-event-title-container {
+    text-align: right;
+}
+
+.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+    margin-right: 2px;
+    border: 1px solid #fff;
 }
