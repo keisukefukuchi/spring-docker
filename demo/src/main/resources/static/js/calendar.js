@@ -22,10 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
         info.el.querySelector(".fc-event-title").style.color = "red"; // 赤色に変更
       }
 
-      if (
-        info.event.id === "sum-expense" &&
-        info.event.start.toDateString() === new Date().toDateString()
-      ) {
+      if (info.event.id === "sum-income") {
+        info.el.querySelector(".fc-event-title").style.fontWeight = "bold"; // 太字に変更
+        info.el.style.backgroundColor = "#fff";
+        info.el.querySelector(".fc-event-title").style.color = "green"; // 赤色に変更
+      }
+
+      if (info.event.start.toDateString() === new Date().toDateString()) {
         info.el.style.backgroundColor = "rgba(255, 220, 40, 0.01)";
         info.el.style.borderColor = "rgba(255, 220, 40, 0.01)"; // ボーダーカラーを設定
       }
