@@ -2,10 +2,12 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Expense;
+import com.example.demo.entity.Income;
 import com.example.demo.entity.PaymentType;
 import com.example.demo.model.DailySummary;
 import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.expense.ExpenseService;
+import com.example.demo.service.income.IncomeService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,16 +25,19 @@ import java.util.UUID;
 public class CalendarController {
 
     private final ExpenseService expenseService;
+    private final IncomeService incomeService;
     private final CategoryService categoryService;
     private final PaymentTypeService paymentTypeService;
 
     @Autowired
     public CalendarController(
             ExpenseService expenseService,
+            IncomeService incomeService,
             CategoryService categoryService,
             PaymentTypeService paymentTypeService
     ) {
         this.expenseService = expenseService;
+        this.incomeService = incomeService;
         this.categoryService = categoryService;
         this.paymentTypeService = paymentTypeService;
     }
@@ -55,6 +60,19 @@ public class CalendarController {
         expense.setPaymentTypeId(paymentTypeId);
         expenseService.saveExpense(expense);
         return "redirect:/";
+    }
+
+    @GetMapping("/income")
+    public String showIncome(Model model) {
+        model.addAttribute("income", new Income());
+        model.addAttribute("incomes", incomeService.getAllIncomes());
+        return "income";
+    }
+
+    @PostMapping("/income")
+    public String addIncome(@ModelAttribute Income income) {
+        incomeService.saveIncome(income);
+        return "redirect:/income";
     }
 
     @GetMapping("/category")

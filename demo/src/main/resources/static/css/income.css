@@ -1,0 +1,149 @@
+.container {
+    width: 80%;
+    margin: 50px auto 0 auto;
+}
+
+.income-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px
+}
+
+.income-title {
+    width: 200px;
+    color: #333333;
+}
+
+.income-list {
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    margin-bottom: 10px;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.income-list p {
+    line-height: 30px;
+}
+
+
+.btn {
+    padding: 5px 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.btn-success {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.openBtn {
+    display: block;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.modal__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.modal__content-inner {
+    background-color: white;
+    width: 500px;
+    text-align: center;
+    padding: 10px 50px 50px 50px;
+    position: relative;
+}
+
+.modal__content-inner h2 {
+    margin-bottom: 40px;
+}
+
+.income-form label {
+    display: block;
+    margin: 10px 0 20px;
+    color: #555;
+    text-align: left;
+}
+
+.income-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-position {
+    text-align: right;
+}
+
+.income-form button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+
+}
+
+.income-form button:hover {
+    background-color: #45a049;
+}
+
+.batsu::before,
+.batsu::after {
+    /* 共通設定 */
+    content: "";
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 5px;
+    /* 棒の幅（太さ） */
+    height: 30px;
+    /* 棒の高さ */
+    background: #333;
+    border-radius: 2.5px;
+    cursor: pointer;
+}
+
+.batsu::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.batsu::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
