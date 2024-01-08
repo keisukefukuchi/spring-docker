@@ -53,16 +53,4 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
   calendar.render();
-
-  // モーダルが閉じられたときに非表示にする
-  modal.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      modal.style.display = "none";
-      calendar.unselect();
-    }
-  });
-
-  closeBtn.addEventListener("click", () => {
-    modal.style.display = "none";
-  });
 });

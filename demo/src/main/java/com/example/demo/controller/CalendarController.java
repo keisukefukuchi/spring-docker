@@ -50,6 +50,15 @@ public class CalendarController {
         return "calendar";
     }
 
+    @GetMapping("/expense")
+    public String showExpense(Model model) {
+        model.addAttribute("expense", new Expense());
+        model.addAttribute("expenses", expenseService.getAllExpenses());
+        model.addAttribute("categories", categoryService.getAllCategories());
+        model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
+        return "expense";
+    }
+
     @PostMapping("/expense")
     public String addExpense(
             @ModelAttribute Expense expense,
@@ -59,7 +68,7 @@ public class CalendarController {
         expense.setCategoryId(categoryId);
         expense.setPaymentTypeId(paymentTypeId);
         expenseService.saveExpense(expense);
-        return "redirect:/";
+        return "redirect:/expense";
     }
 
     @GetMapping("/income")

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Category List</title>
+    <link th:href="@{/css/common.css}" rel="stylesheet" />
+    <link th:href="@{/css/expense.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="header">
+      <a th:href="@{/}"> 家計簿アプリ </a>
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li class="header-nav-item"><a th:href="@{/}">ホーム</a></li>
+          <li class="header-nav-item"><a th:href="@{/expense}">出金</a></li>
+          <li class="header-nav-item"><a th:href="@{/income}">入金</a></li>
+          <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
+          <li class="header-nav-item">
+            <a th:href="@{/category}">カテゴリー</a>
+          </li>
+          <li class="header-nav-item">
+            <a th:href="@{/payment-type}">支払い系統</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="container">
+      <div class="expense-header">
+        <h1 class="expense-title">支出一覧</h1>
+
+        <div class="expense-register-button">
+          <!-- Add New Category Button -->
+          <input
+            type="button"
+            id="openBtn"
+            value="追加"
+            class="openBtn btn btn-success"
+          />
+        </div>
+      </div>
+
+      <!-- Display the list of categories -->
+      <ul th:each="expense : ${expenses}">
+        <li class="expense-list">
+          <p th:text="${expense.date}"></p>
+          <p th:text="${expense.name}"></p>
+          <p th:text="${expense.price}"></p>
+
+          <div class="expense-buttons">
+            <!-- Edit Button -->
+            <!-- Delete Button -->
+            <form
+              th:action="@{'/editExpense/' + ${expense.expenseId}}"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-primary">編集</button>
+            </form>
+
+            <!-- Delete Button -->
+            <form
+              th:action="@{'/deleteExpense/' + ${expense.expenseId}}"
+              method="post"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="btn btn-danger"
+                onclick="return confirm('Are you sure?')"
+              >
+                削除
+              </button>
+            </form>
+          </div>
+        </li>
+      </ul>
+
+      <div id="modal" class="modal">
+        <div class="modal__content">
+          <div class="modal__content-inner">
+            <h2>出金</h2>
+            <span id="closeBtn" class="closeBtn batsu"></span>
+            <form
+              class="expense-form"
+              th:action="@{/expense}"
+              th:object="${expense}"
+              method="post"
+            >
+              <label for="expenseDate">登録日</label>
+              <input type="date" id="expenseDate" th:field="*{date}" required />
+              <!-- Name field -->
+              <label for="name">出金名:</label>
+              <input type="text" id="name" th:field="*{name}" required />
+              <!-- Expense Category -->
+              <div class="label-container">
+                <label class="category-label" for="expenseCategory"
+                  >カテゴリー</label
+                >
+                <select
+                  id="expenseCategory"
+                  name="categoryId"
+                  required
+                  th:options="${categories}"
+                >
+                  <option
+                    th:each="category : ${categories}"
+                    th:value="${category.categoryId}"
+                    th:text="${category.name}"
+                  ></option>
+                </select>
+              </div>
+
+              <!-- Payment Type -->
+              <div class="label-container">
+                <label class="payment-type-label" for="paymentType"
+                  >支払い系統</label
+                >
+                <select
+                  id="paymentType"
+                  name="paymentTypeId"
+                  required
+                  th:options="${paymentTypes}"
+                >
+                  <option
+                    th:each="paymentType : ${paymentTypes}"
+                    th:value="${paymentType.paymentTypeId}"
+                    th:text="${paymentType.name}"
+                  ></option>
+                </select>
+              </div>
+
+              <!-- Expense Amount -->
+              <label for="expenseAmount">料金</label>
+              <input
+                type="number"
+                id="expenseAmount"
+                th:field="*{price}"
+                required
+              />
+              <div class="button-position">
+                <!-- Submit button -->
+                <button type="submit">追加</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/income.js}"></script>
+  </body>
+</html>
