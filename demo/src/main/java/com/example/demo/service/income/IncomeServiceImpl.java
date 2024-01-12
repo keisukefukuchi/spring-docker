@@ -4,6 +4,7 @@ package com.example.demo.service.income;
 import com.example.demo.entity.Income;
 import com.example.demo.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -37,6 +38,11 @@ public class IncomeServiceImpl implements IncomeService {
         income.setUpdatedAt(LocalDate.now());
 
         incomeRepository.save(income);
+    }
+
+    @Override
+    public int getTotalIncomeByMonth(int year, int month) {
+        return incomeRepository.getTotalIncomeByMonth(year, month);
     }
 
     @Override

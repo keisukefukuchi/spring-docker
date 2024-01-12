@@ -2,6 +2,7 @@ package com.example.demo.service.expense;
 
 // ExpenseService.java
 import com.example.demo.entity.Expense;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -14,6 +15,7 @@ public interface ExpenseService {
     Expense getExpenseById(UUID id);
 
 //    List<Expense> getExpensesByMonth(Month month);
+    int getTotalExpenseByMonth(int year, int month);
 
 
     void saveExpense(Expense expense);

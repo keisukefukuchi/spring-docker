@@ -5,6 +5,7 @@ import com.example.demo.entity.Expense;
 import com.example.demo.repository.ExpenseRepository;
 import com.example.demo.service.expense.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -36,6 +37,11 @@ public class ExpenseServiceImpl implements ExpenseService {
 //    public List<Expense> getExpensesByMonth(Month month) {
 //        return expenseRepository.findByDateYearMonth(month);
 //    }
+
+    @Override
+    public int getTotalExpenseByMonth(int year, int month) {
+        return expenseRepository.getTotalExpenseByMonth(year,month);
+    }
 
     @Override
     public void saveExpense(Expense expense) {

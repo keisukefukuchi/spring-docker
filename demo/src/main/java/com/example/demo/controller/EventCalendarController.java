@@ -10,19 +10,19 @@ import com.example.demo.service.paymentType.PaymentTypeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/event")
+@RequestMapping("/api/v1")
 class EventCalendarController {
 
     private final ExpenseService expenseService;
@@ -88,5 +88,26 @@ class EventCalendarController {
             System.out.println(e.getMessage());
         }
         return jsonMsg;
+    }
+
+    @GetMapping(value = "/data/{year}/{month}")
+    public Map<String, Integer> getAmountByMonth(
+            @PathVariable int year,
+            @PathVariable int month
+    ) {
+        // 該当月の収入合計を取得
+        int totalIncome = incomeService.getTotalIncomeByMonth(year, month);
+
+        // 該当月の支出合計を取得
+        int totalExpense = expenseService.getTotalExpenseByMonth(year, month);
+
+        // 合計金額を文字列として返す（ここで加工や他の処理を行う）
+        System.out.println("Total Income: " + totalIncome + ", Total Expense: " + totalExpense);
+        // JSON形式でデータを返す
+        Map<String, Integer> result = new HashMap<>();
+        result.put("totalIncome", totalIncome);
+        result.put("totalExpense", totalExpense);
+
+        return result;
     }
 }
