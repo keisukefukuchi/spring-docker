@@ -75,45 +75,43 @@ document.addEventListener("DOMContentLoaded", function () {
       fetchDataAndUpdate();
     });
 
-    window.addEventListener("load", function () {
-      if (window.location.pathname === "/") {
-        console.log(1);
-        fetchDataAndUpdate();
-      }
-    });
-
-    // 前月や次月が表示されたときの処理
-    function fetchDataAndUpdate() {
-      // カレンダーのタイトルを取得
-      let calendarTitle = calendar.view.title;
-
-      let [year, month] = calendarTitle.split("年");
-      console.log(calendarTitle.split(" "));
-      console.log(parseInt(year));
-      console.log(parseInt(month));
-
-      // サーバーからデータを取得
-      fetchDataFromServer(parseInt(year), parseInt(month))
-        .then((data) => {
-          // 月ごとの出金額と入金額を更新
-          updateAmounts(data.totalExpense, data.totalIncome);
-        })
-        .catch((error) => {
-          console.error("データの取得に失敗しました:", error);
-        });
+  window.addEventListener("load", function () {
+    if (window.location.pathname === "/") {
+      console.log(1);
+      fetchDataAndUpdate();
     }
+  });
 
-    // サーバーからデータを取得する関数（先ほどと同じものを使用）
-    function fetchDataFromServer(year, month) {
-      return fetch(`/api/v1/data/${year}/${month}`) // サーバーのAPIエンドポイントに合わせて変更
-        .then((response) => response.json());
-    }
+  // 前月や次月が表示されたときの処理
+  function fetchDataAndUpdate() {
+    // カレンダーのタイトルを取得
+    let calendarTitle = calendar.view.title;
 
-    // 月ごとの出金額と入金額を更新する関数（先ほどと同じものを使用）
-    function updateAmounts(expenseAmount, incomeAmount) {
-      document.getElementById("expenseAmount").textContent = expenseAmount;
-      document.getElementById("incomeAmount").textContent = incomeAmount;
-    }
+    let [year, month] = calendarTitle.split("年");
+    console.log(calendarTitle.split(" "));
+    console.log(parseInt(year));
+    console.log(parseInt(month));
+
+    // サーバーからデータを取得
+    fetchDataFromServer(parseInt(year), parseInt(month))
+      .then((data) => {
+        // 月ごとの出金額と入金額を更新
+        updateAmounts(data.totalExpense, data.totalIncome);
+      })
+      .catch((error) => {
+        console.error("データの取得に失敗しました:", error);
+      });
+  }
+
+  // サーバーからデータを取得する関数（先ほどと同じものを使用）
+  function fetchDataFromServer(year, month) {
+    return fetch(`/api/v1/data/${year}/${month}`) // サーバーのAPIエンドポイントに合わせて変更
+      .then((response) => response.json());
+  }
+
+  // 月ごとの出金額と入金額を更新する関数（先ほどと同じものを使用）
+  function updateAmounts(expenseAmount, incomeAmount) {
+    document.getElementById("expenseAmount").textContent = expenseAmount + "円";
+    document.getElementById("incomeAmount").textContent = incomeAmount + "円";
+  }
 });
-
-

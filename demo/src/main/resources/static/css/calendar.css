@@ -13,14 +13,27 @@
 
 .month-expense,
 .month-income {
-    text-align: center;
+    display: flex;
     margin: 10px;
-    /* Adjust margin as needed */
+    text-align: center;
 }
 
-.month-expense,
-.month-income {
-    flex: 1;
+#expenseAmount {
+    margin-left: 10px;
+    color: red;
+}
+
+#incomeAmount {
+    margin-left: 10px;
+    color: green;
+}
+
+.month-expense h3,
+.month-income h3,
+#expenseAmount,
+#incomeAmount {
+    font-size: 24px;
+    font-size: bold;
 }
 
 /* Style for the calendar */
@@ -239,7 +252,8 @@
     text-align: right;
 }
 
-.fc-direction-ltr .fc-daygrid-event.fc-event-end, .fc-direction-rtl .fc-daygrid-event.fc-event-start {
+.fc-direction-ltr .fc-daygrid-event.fc-event-end,
+.fc-direction-rtl .fc-daygrid-event.fc-event-start {
     margin-right: 2px;
     border: 1px solid #fff;
 }
