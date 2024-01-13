@@ -10,8 +10,8 @@
     <a th:href="@{/}"> 家計簿アプリ </a>
     <nav class="header-nav">
         <ul class="header-nav-list">
-            <li class="header-nav-item"><a th:href="@{/expense}">出金</a></li>
-            <li class="header-nav-item"><a th:href="@{/income}">入金</a></li>
+            <li class="header-nav-item"><a th:href="@{/expense}">支出</a></li>
+            <li class="header-nav-item"><a th:href="@{/income}">収入</a></li>
             <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
             <li class="header-nav-item">
                 <a th:href="@{/category}">カテゴリー</a>
@@ -24,7 +24,7 @@
 </div>
 <div class="container">
     <div class="income-header">
-        <h1 class="income-title">入金一覧</h1>
+        <h1 class="income-title">収入一覧</h1>
 
         <div class="income-register-button">
             <!-- Add New Category Button -->
@@ -77,7 +77,7 @@
     <div id="modal" class="modal">
         <div class="modal__content">
             <div class="modal__content-inner">
-                <h2>入金</h2>
+                <h2>収入</h2>
                 <span id="closeBtn" class="closeBtn batsu"></span>
                 <form
                         class="income-form"
@@ -91,7 +91,7 @@
                     >
                     <input type="date" id="incomeDate" th:field="*{date}" required />
                     <!-- Name field -->
-                    <label for="name">入金名:</label>
+                    <label for="name">収入名:</label>
                     <input type="text" id="name" th:field="*{name}" required />
                     <!-- Expense Amount -->
                     <label for="incomeAmount">料金</label>

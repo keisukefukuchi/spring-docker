@@ -14,8 +14,8 @@
       <a th:href="@{/}"> 家計簿アプリ </a>
       <nav class="header-nav">
         <ul class="header-nav-list">
-          <li class="header-nav-item"><a th:href="@{/expense}">出金</a></li>
-          <li class="header-nav-item"><a th:href="@{/income}">入金</a></li>
+          <li class="header-nav-item"><a th:href="@{/expense}">支出</a></li>
+          <li class="header-nav-item"><a th:href="@{/income}">収入</a></li>
           <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
           <li class="header-nav-item">
             <a th:href="@{/category}">カテゴリー</a>
@@ -29,11 +29,11 @@
     <div class="container">
       <div class="month-money">
         <div class="month-expense">
-          <h3>月の出金額</h3>
+          <h3>月の支出額</h3>
           <p id="expenseAmount">0円</p>
         </div>
         <div class="month-income">
-          <h3>月の入金額</h3>
+          <h3>月の収入額</h3>
           <p id="incomeAmount">0円</p>
         </div>
       </div>

@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // サーバーからデータを取得
     fetchDataFromServer(parseInt(year), parseInt(month))
       .then((data) => {
-        // 月ごとの出金額と入金額を更新
+        // 月ごとの支出額と収入額を更新
         updateAmounts(data.totalExpense, data.totalIncome);
       })
       .catch((error) => {
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .then((response) => response.json());
   }
 
-  // 月ごとの出金額と入金額を更新する関数（先ほどと同じものを使用）
+  // 月ごとの支出額と収入額を更新する関数（先ほどと同じものを使用）
   function updateAmounts(expenseAmount, incomeAmount) {
     document.getElementById("expenseAmount").textContent = expenseAmount + "円";
     document.getElementById("incomeAmount").textContent = incomeAmount + "円";
