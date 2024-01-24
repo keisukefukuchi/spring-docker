@@ -2,6 +2,7 @@ package com.example.demo.service.expense;
 
 // ExpenseServiceImpl.java
 import com.example.demo.entity.Expense;
+import com.example.demo.entity.Income;
 import com.example.demo.repository.ExpenseRepository;
 import com.example.demo.service.expense.ExpenseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -31,6 +33,11 @@ public class ExpenseServiceImpl implements ExpenseService {
     @Override
     public Expense getExpenseById(UUID id) {
         return expenseRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Expense> getExpenseByDate(int year, int month, int day) {
+        return expenseRepository.findByDate(year, month, day);
     }
 
 //    @Override

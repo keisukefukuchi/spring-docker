@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
   let calendarEl = document.getElementById("calendar");
-  let modal = document.getElementById("expenseModal");
-  let dateInput = document.getElementById("expenseDate");
+  let modal = document.getElementById("modal");
+  let dateInput = document.getElementById("date");
   const closeBtn = document.getElementById("closeBtn");
+  let incomeContainer = document.getElementById("day-income");
+  let expenseContainer = document.getElementById("day-expense");
 
   let calendar = new FullCalendar.Calendar(calendarEl, {
     locale: "ja",
@@ -38,7 +40,62 @@ document.addEventListener("DOMContentLoaded", function () {
       // モーダルを表示
       modal.style.display = "flex";
       // クリックされた日付をフォームの入力に設定
-      dateInput.value = info.dateStr;
+      dateInput.textContent = info.dateStr;
+
+      let [year, month, day] = info.dateStr.split("-");
+
+      // サーバーからデータを取得
+      fetchTheDayData(parseInt(year), parseInt(month), parseInt(day))
+        .then((data) => {
+          data.forEach((entry) => {
+            console.log(entry);
+            if (entry.type === "income") {
+              // 収入データの処理
+              let incomeElement = document.createElement("ul");
+              let nameElement = document.createElement("li");
+              let priceElement = document.createElement("li");
+
+              incomeElement.classList.add("income-list")
+              nameElement.classList.add("income-name");
+              priceElement.classList.add("income-price");
+
+              nameElement.textContent = entry.theDayIncomeName;
+              priceElement.textContent = entry.theDayIncomePrice;
+
+              incomeElement.appendChild(nameElement);
+              incomeElement.appendChild(priceElement);
+              incomeContainer.appendChild(incomeElement);
+
+            } else if (entry.type === "expense") {
+              // 支出データの処理
+              let expenseElement = document.createElement("ul");
+              let nameElement = document.createElement("li");
+              let priceElement = document.createElement("li");
+              let paymentTypeElement = document.createElement("li");
+              let categoryElement = document.createElement("li");
+
+              incomeElement.classList.add("income-list")
+              nameElement.classList.add("income-name");
+              priceElement.classList.add("income-price");
+              paymentTypeElement.classList.add("income-payment-type");
+              categoryElement.classList.add("income-category");
+
+              nameElement.textContent = entry.theDayExpenseName;
+              priceElement.textContent = entry.theDayExpensePrice;
+              paymentTypeElement.textContent = entry.theDayExpensePaymentType;
+              categoryElement.textContent = entry.theDayExpenseCategory;
+
+              expenseElement.appendChild(nameElement);
+              expenseElement.appendChild(priceElement);
+              expenseElement.appendChild(paymentTypeElement);
+              expenseElement.appendChild(categoryElement);
+              expenseContainer.appendChild(expenseElement);
+            }
+          });
+        })
+        .catch((error) => {
+          console.error("データの取得に失敗しました:", error);
+        });
     },
     buttonText: { month: "月" },
     buttonHints: {
@@ -60,6 +117,31 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   calendar.render();
+
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      modal.style.display = "none";
+      calendar.unselect();
+    }
+  });
+
+  closeBtn.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+  window.addEventListener("click", (e) => {
+    if (
+      !e.target.closest(".modal__content-inner") &&
+      e.target.id !== "openBtn"
+    ) {
+      modal.style.display = "none";
+    }
+  });
+
+  // サーバーからデータを取得する関数（先ほどと同じものを使用）
+  function fetchTheDayData(year, month, day) {
+    return fetch(`/api/v1/data/${year}/${month}/${day}`) // サーバーのAPIエンドポイントに合わせて変更
+      .then((response) => response.json());
+  }
 
   document
     .getElementsByClassName("fc-prev-button")[0]

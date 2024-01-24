@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -29,6 +30,11 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public Income getIncomeById(UUID id) {
         return incomeRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public List<Income> getIncomeByDate(int year, int month, int day) {
+        return incomeRepository.findByDate(year, month, day);
     }
 
     @Override

@@ -29,16 +29,37 @@
     <div class="container">
       <div class="month-money">
         <div class="month-expense">
-          <h3>月の支出額</h3>
+          <h3>支出</h3>
           <p id="expenseAmount">0円</p>
         </div>
         <div class="month-income">
-          <h3>月の収入額</h3>
+          <h3>収入</h3>
           <p id="incomeAmount">0円</p>
         </div>
       </div>
       <!-- カレンダー表示 -->
       <div class="calendar" id="calendar"></div>
+      <div id="modal" class="modal">
+        <div class="modal__content">
+          <div class="modal__content-inner">
+            <h2 id="date"></h2>
+            <span id="closeBtn" class="closeBtn batsu"></span>
+
+            <div class="tab-wrap">
+              <input id="expense-tab" type="radio" name="tab" class="tab-switch" checked="checked" />
+              <label class="tab-label" for="expense-tab">支出</label>
+              <div id="day-expense" class="tab-content">
+
+              </div>
+              <input id="income-tab" type="radio" name="tab" class="tab-switch" />
+              <label class="tab-label" for="income-tab">収入</label>
+              <div id="day-income" class="tab-content">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script th:src="@{/js/calendar.js}"></script>
