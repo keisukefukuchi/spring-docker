@@ -14,7 +14,7 @@
     margin: 0 5px;
 }
 
-.pagination a {
+.pagination a, .pagination span {
     display: block;
     padding: 8px 16px;
     text-decoration: none;

@@ -1,9 +1,13 @@
 package com.example.demo.service.income;
 
 // IncomeServiceImpl.java
+import com.example.demo.entity.Expense;
 import com.example.demo.entity.Income;
 import com.example.demo.repository.IncomeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,12 @@ public class IncomeServiceImpl implements IncomeService {
     @Override
     public List<Income> getAllIncomes() {
         return incomeRepository.findAll();
+    }
+
+    @Override
+    public Page<Income> getIncomesByPage(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "date"));
+        return incomeRepository.findAll(pageRequest);
     }
 
     @Override

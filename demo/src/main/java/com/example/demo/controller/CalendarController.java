@@ -81,9 +81,17 @@ public class CalendarController {
     }
 
     @GetMapping("/income")
-    public String showIncome(Model model) {
+    public String showIncome(Model model,
+                             @RequestParam(defaultValue = "0") int page,
+                             @RequestParam(defaultValue = "8") int size) {
+        Page<Income> incomePage = incomeService.getIncomesByPage(page, size);
+
         model.addAttribute("income", new Income());
-        model.addAttribute("incomes", incomeService.getAllIncomes());
+        model.addAttribute("incomes", incomePage.getContent());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("size", size);
+        model.addAttribute("totalPages", incomePage.getTotalPages());
+
         return "income";
     }
 
