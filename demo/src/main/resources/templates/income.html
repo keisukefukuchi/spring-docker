@@ -1,132 +1,144 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>Category List</title>
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/income.css}" rel="stylesheet" />
     <link th:href="@{/css/pagination.css}" rel="stylesheet" />
-
-</head>
-<body>
-<div class="header">
-    <a th:href="@{/}"> 家計簿アプリ </a>
-    <nav class="header-nav">
+  </head>
+  <body>
+    <div class="header">
+      <a th:href="@{/}"> 家計簿アプリ </a>
+      <nav class="header-nav">
         <ul class="header-nav-list">
-            <li class="header-nav-item"><a th:href="@{/expense}">支出</a></li>
-            <li class="header-nav-item"><a th:href="@{/income}">収入</a></li>
-            <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
-            <li class="header-nav-item">
-                <a th:href="@{/category}">カテゴリー</a>
-            </li>
-            <li class="header-nav-item">
-                <a th:href="@{/payment-type}">支払い系統</a>
-            </li>
+          <li class="header-nav-item"><a th:href="@{/expense}">支出</a></li>
+          <li class="header-nav-item"><a th:href="@{/income}">収入</a></li>
+          <li class="header-nav-item"><a th:href="@{/user}">ユーザ登録</a></li>
+          <li class="header-nav-item">
+            <a th:href="@{/category}">カテゴリー</a>
+          </li>
+          <li class="header-nav-item">
+            <a th:href="@{/payment-type}">支払い系統</a>
+          </li>
         </ul>
-    </nav>
-</div>
-<div class="container">
-    <div class="income-header">
+      </nav>
+    </div>
+    <div class="container">
+      <div class="income-header">
         <h1 class="income-title">収入一覧</h1>
 
         <div class="income-register-button">
-            <!-- Add New Category Button -->
-            <input
-                    type="button"
-                    id="openBtn"
-                    value="追加"
-                    class="openBtn btn btn-success"
-            />
+          <input
+            type="button"
+            id="openBtn"
+            value="追加"
+            class="openBtn btn btn-success"
+          />
         </div>
-    </div>
+      </div>
 
-    <!-- Pagination -->
-    <div class="pagination">
+      <div class="pagination">
         <ul>
-            <li th:if="${currentPage > 0}" th:class="${currentPage == 0} ? 'disabled' : ''">
-                <a th:href="@{'/income?page=' + (${currentPage - 1}) + '&size=' + ${size}}" aria-label="Previous">
-                    前へ
-                </a>
-            </li>
-            <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageNumber == currentPage} ? 'active' : ''">
-                <a th:if="${pageNumber != currentPage}" th:href="@{'/income?page=' + ${pageNumber} + '&size=' + ${size}}" th:text="${pageNumber + 1}"></a>
-                <span th:if="${pageNumber == currentPage}" th:text="${pageNumber + 1}"></span>
-            </li>
-            <li th:if="${currentPage < totalPages - 1}" th:class="${currentPage == totalPages - 1} ? 'disabled' : ''">
-                <a th:href="@{'/income?page=' + (${currentPage + 1}) + '&size=' + ${size}}" aria-label="Next">
-                    次へ
-                </a>
-            </li>
+          <li
+            th:if="${currentPage > 0}"
+            th:class="${currentPage == 0} ? 'disabled' : ''"
+          >
+            <a
+              th:href="@{'/income?page=' + (${currentPage - 1}) + '&size=' + ${size}}"
+              aria-label="Previous"
+            >
+              前へ
+            </a>
+          </li>
+          <li
+            th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+            th:class="${pageNumber == currentPage} ? 'active' : ''"
+          >
+            <a
+              th:if="${pageNumber != currentPage}"
+              th:href="@{'/income?page=' + ${pageNumber} + '&size=' + ${size}}"
+              th:text="${pageNumber + 1}"
+            ></a>
+            <span
+              th:if="${pageNumber == currentPage}"
+              th:text="${pageNumber + 1}"
+            ></span>
+          </li>
+          <li
+            th:if="${currentPage < totalPages - 1}"
+            th:class="${currentPage == totalPages - 1} ? 'disabled' : ''"
+          >
+            <a
+              th:href="@{'/income?page=' + (${currentPage + 1}) + '&size=' + ${size}}"
+              aria-label="Next"
+            >
+              次へ
+            </a>
+          </li>
         </ul>
-    </div>
+      </div>
 
-    <!-- Display the list of categories -->
-    <ul th:each="income : ${incomes}">
+      <ul th:each="income : ${incomes}">
         <li class="income-list">
-            <p th:text="${income.date}"></p>
-            <p th:text="${income.name}"></p>
-            <p th:text="${income.price}"></p>
+          <p th:text="${income.date}"></p>
+          <p th:text="${income.name}"></p>
+          <p th:text="${income.price}"></p>
 
-
-            <div class="income-buttons">
-                <!-- Edit Button -->
-                <!-- Delete Button -->
-                <form
-                        th:action="@{'/editIncome/' + ${income.incomeId}}"
-                        method="post"
-                        style="display: inline"
-                >
-                    <button type="submit" class="btn btn-primary">編集</button>
-                </form>
-
-                <!-- Delete Button -->
-                <form
-                        th:action="@{'/deleteIncome/' + ${income.incomeId}}"
-                        method="post"
-                        style="display: inline"
-                >
-                    <button
-                            type="submit"
-                            class="btn btn-danger"
-                            onclick="return confirm('Are you sure?')"
-                    >
-                        削除
-                    </button>
-                </form>
-            </div>
+          <div class="income-buttons">
+            <form
+              th:action="@{'/editIncome/' + ${income.incomeId}}"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-primary">編集</button>
+            </form>
+            <form
+              th:action="@{'/deleteIncome/' + ${income.incomeId}}"
+              method="post"
+              style="display: inline"
+            >
+              <button
+                type="submit"
+                class="btn btn-danger"
+                onclick="return confirm('Are you sure?')"
+              >
+                削除
+              </button>
+            </form>
+          </div>
         </li>
-    </ul>
+      </ul>
 
-    <div id="modal" class="modal">
+      <div id="modal" class="modal">
         <div class="modal__content">
-            <div class="modal__content-inner">
-                <h2>収入</h2>
-                <span id="closeBtn" class="closeBtn batsu"></span>
-                <form
-                        class="income-form"
-                        th:action="@{/income}"
-                        th:object="${income}"
-                        method="post"
-                >
-                    <label
-                            for="incomeDate"
-                    >登録日</label
-                    >
-                    <input type="date" id="incomeDate" th:field="*{date}" required />
-                    <!-- Name field -->
-                    <label for="name">収入名:</label>
-                    <input type="text" id="name" th:field="*{name}" required />
-                    <!-- Expense Amount -->
-                    <label for="incomeAmount">料金</label>
-                    <input type="number" id="incomeAmount" th:field="*{price}" required />
-                    <div class="button-position">
-                        <!-- Submit button -->
-                        <button type="submit">追加</button>
-                    </div>
-                </form>
-            </div>
+          <div class="modal__content-inner">
+            <h2>収入</h2>
+            <span id="closeBtn" class="closeBtn batsu"></span>
+            <form
+              class="income-form"
+              th:action="@{/income}"
+              th:object="${income}"
+              method="post"
+            >
+              <label for="incomeDate">登録日</label>
+              <input type="date" id="incomeDate" th:field="*{date}" required />
+              <label for="name">収入名:</label>
+              <input type="text" id="name" th:field="*{name}" required />
+              <label for="incomeAmount">料金</label>
+              <input
+                type="number"
+                id="incomeAmount"
+                th:field="*{price}"
+                required
+              />
+              <div class="button-position">
+                <button type="submit">追加</button>
+              </div>
+            </form>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-<script th:src="@{/js/income.js}"></script>
-</body>
+    <script th:src="@{/js/income.js}"></script>
+  </body>
 </html>

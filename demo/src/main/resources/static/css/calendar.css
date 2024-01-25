@@ -36,29 +36,23 @@
     font-size: bold;
 }
 
-/* Style for the calendar */
+/* Full Calendar */
 .calendar {
-    /* Adjust the height as needed, considering margin-top and margin-bottom */
     overflow: auto;
-    /* Enable scrolling within the calendar */
 }
 
-/* FullCalendar styles */
 .fc-event {
     cursor: pointer;
 }
 
-/* Optional: Add some hover effect for better user experience */
 .fc-event:hover {
     background-color: #f0f0f0;
 }
 
-/* Optional: Style the header of the calendar */
 .fc-toolbar {
     margin-bottom: 20px;
 }
 
-/* Optional: Style the button in the header */
 .fc-button {
     background-color: #007bff;
     color: #fff;
@@ -68,7 +62,6 @@
     background-color: #0056b3;
 }
 
-/* Full Calendar */
 #calendar {
     align-items: center;
     cursor: pointer;
@@ -79,7 +72,6 @@
     content: attr(title);
 }
 
-/*週*/
 .fc-col-header-cell {
     background: #d3d3d3;
 }
@@ -99,7 +91,6 @@
 }
 
 /* モーダル */
-/* モーダル用のスタイル */
 .modal {
     display: none;
     position: fixed;
@@ -133,18 +124,14 @@
     margin-bottom: 40px;
 }
 
-
 .batsu::before,
 .batsu::after {
-    /* 共通設定 */
     content: "";
     position: absolute;
     top: 25px;
     right: 25px;
     width: 5px;
-    /* 棒の幅（太さ） */
     height: 30px;
-    /* 棒の高さ */
     background: #333;
     border-radius: 2.5px;
     cursor: pointer;
@@ -159,7 +146,6 @@
 }
 
 .fc-event-title:hover {
-    /* ホバー時のスタイルを無効にする */
     background-color: inherit;
     color: inherit;
     text-decoration: none;
@@ -176,7 +162,6 @@
 }
 
 /* tab */
-/*タブ切り替え全体のスタイル*/
 .tabs {
     margin-top: 50px;
     padding-bottom: 40px;
@@ -186,7 +171,6 @@
     margin: 0 auto;
 }
 
-/*タブのスタイル*/
 .tab_item {
     width: calc(100%/2);
     height: 50px;
@@ -207,12 +191,10 @@
     opacity: 0.75;
 }
 
-/*ラジオボタンを全て消す*/
 input[name="tab_item"] {
     display: none;
 }
 
-/*タブ切り替えの中身のスタイル*/
 .tab_content {
     display: none;
     padding: 40px 40px 0;
@@ -225,54 +207,43 @@ input[name="tab_item"] {
     table-layout: fixed;
 }
 
-/*選択されているタブのコンテンツのみを表示*/
 #expense:checked~#expense_content,
 #income:checked~#income_content {
     display: block;
 }
 
-/*選択されているタブのスタイルを変える*/
 .tabs input:checked+.tab_item {
     background-color: #5ab4bd;
     color: #fff;
 }
 
-
-/* 共通の行ボックススタイル */
 .expense_box,
 .income_box {
     text-align: center;
 }
 
-/* ヘッダのスタイル */
 .expense_head {
     width: 1000px;
     background-color: #f2f2f2;
-    /* 行ボックスの背景色を設定 */
     padding: 10px;
 }
 
 .income_head {
     width: 1000px;
     background-color: #f2f2f2;
-    /* 行ボックスの背景色を設定 */
     padding: 10px;
 }
 
-/* データセルのスタイル */
 .expense_box td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    /* データ行の下にボーダーを設定 */
 }
 
 .income_box td {
     padding: 10px;
     border-bottom: 1px solid #ddd;
-    /* データ行の下にボーダーを設定 */
 }
 
-/* 最後のデータ行のボーダーを削除 */
 .expense_box tr:last-child td,
 .income_box tr:last-child td {
     border-bottom: none;

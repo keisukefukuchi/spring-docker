@@ -10,7 +10,6 @@
 }
 
 .income-title {
-    width: 200px;
     color: #333333;
 }
 
@@ -126,15 +125,12 @@
 
 .batsu::before,
 .batsu::after {
-    /* 共通設定 */
     content: "";
     position: absolute;
     top: 30px;
     right: 30px;
     width: 5px;
-    /* 棒の幅（太さ） */
     height: 30px;
-    /* 棒の高さ */
     background: #333;
     border-radius: 2.5px;
     cursor: pointer;

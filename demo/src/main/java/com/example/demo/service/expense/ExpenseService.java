@@ -1,30 +1,22 @@
 package com.example.demo.service.expense;
 
-// ExpenseService.java
 import com.example.demo.entity.Expense;
-import com.example.demo.entity.Income;
-import org.springframework.data.domain.Page;
-import org.springframework.data.repository.query.Param;
-
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
+import org.springframework.data.domain.Page;
 
 public interface ExpenseService {
-    List<Expense> getAllExpenses();
+  List<Expense> getAllExpenses();
 
-    Page<Expense> getExpensesByPage(int page, int size);
+  Page<Expense> getExpensesByPage(int page, int size);
 
-    Expense getExpenseById(UUID id);
+  Expense getExpenseById(UUID id);
 
-//    List<Expense> getExpensesByMonth(Month month);
-    int getTotalExpenseByMonth(int year, int month);
+  int getTotalExpenseByMonth(int year, int month);
 
-    List<Expense> getExpenseByDate(int year, int month, int day);
+  List<Expense> getExpenseByDate(int year, int month, int day);
 
-    void saveExpense(Expense expense);
+  void saveExpense(Expense expense);
 
-    void deleteExpense(UUID id);
+  void deleteExpense(UUID id);
 }

@@ -15,59 +15,53 @@ document.addEventListener("DOMContentLoaded", function () {
       end: "next",
     },
     events: {
-      url: "/api/v1/all", //ここにRestControllerを呼び出すurlを記載
+      url: "/api/v1/all",
     },
     eventDidMount: function (info) {
       if (info.event.id === "sum-expense") {
-        info.el.querySelector(".fc-event-title").style.fontWeight = "bold"; // 太字に変更
+        info.el.querySelector(".fc-event-title").style.fontWeight = "bold";
         info.el.style.backgroundColor = "#fff";
-        info.el.querySelector(".fc-event-title").style.color = "red"; // 赤色に変更
+        info.el.querySelector(".fc-event-title").style.color = "red";
       }
 
       if (info.event.id === "sum-income") {
-        info.el.querySelector(".fc-event-title").style.fontWeight = "bold"; // 太字に変更
+        info.el.querySelector(".fc-event-title").style.fontWeight = "bold";
         info.el.style.backgroundColor = "#fff";
-        info.el.querySelector(".fc-event-title").style.color = "green"; // 赤色に変更
+        info.el.querySelector(".fc-event-title").style.color = "green";
       }
 
       if (info.event.start.toDateString() === new Date().toDateString()) {
         info.el.style.backgroundColor = "rgba(255, 220, 40, 0.01)";
-        info.el.style.borderColor = "rgba(255, 220, 40, 0.01)"; // ボーダーカラーを設定
+        info.el.style.borderColor = "rgba(255, 220, 40, 0.01)";
       }
     },
     initialView: "dayGridMonth",
     dateClick: function (info) {
-      // モーダルを表示
       modal.style.display = "flex";
-      // クリックされた日付をフォームの入力に設定
       dateInput.textContent = info.dateStr;
 
       let [year, month, day] = info.dateStr.split("-");
 
-      // 2番目以降の要素を削除
-      let incomeSecondElement = incomeTable.querySelectorAll("tr:nth-child(n+2)"); // 2番目以降の全ての要素
-      if(incomeSecondElement) {
+      let incomeSecondElement =
+        incomeTable.querySelectorAll("tr:nth-child(n+2)");
+      if (incomeSecondElement) {
         incomeSecondElement.forEach((element) => {
-           incomeTable.removeChild(element);
+          incomeTable.removeChild(element);
         });
       }
 
-      // 2番目以降の要素を削除
-      let expenseSecondElement = expenseTable.querySelectorAll("tr:nth-child(n+2)"); // 2番目以降の全ての要素
-      if(expenseSecondElement) {
+      let expenseSecondElement =
+        expenseTable.querySelectorAll("tr:nth-child(n+2)");
+      if (expenseSecondElement) {
         expenseSecondElement.forEach((element) => {
-           expenseTable.removeChild(element);
+          expenseTable.removeChild(element);
         });
       }
 
-
-      // サーバーからデータを取得
       fetchTheDayData(parseInt(year), parseInt(month), parseInt(day))
         .then((data) => {
-          console.log(data);
           data.forEach((entry) => {
             if (entry.type === "income") {
-              // 収入データの処理
               let incomeElement = document.createElement("tr");
               let nameElement = document.createElement("td");
               let priceElement = document.createElement("td");
@@ -83,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
               incomeElement.appendChild(priceElement);
               incomeTable.appendChild(incomeElement);
             } else if (entry.type === "expense") {
-              // 支出データの処理
               let expenseElement = document.createElement("tr");
               let nameElement = document.createElement("td");
               let priceElement = document.createElement("td");
@@ -119,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
       next: "次の$0",
     },
     dayCellContent: function (arg) {
-      // 日を消す
       return arg.date.getDate();
     },
     views: {
@@ -153,47 +145,37 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // サーバーからデータを取得する関数（先ほどと同じものを使用）
   function fetchTheDayData(year, month, day) {
-    return fetch(`/api/v1/data/${year}/${month}/${day}`) // サーバーのAPIエンドポイントに合わせて変更
-      .then((response) => response.json());
+    return fetch(`/api/v1/data/${year}/${month}/${day}`).then((response) =>
+      response.json()
+    );
   }
 
   document
     .getElementsByClassName("fc-prev-button")[0]
     .addEventListener("click", function () {
-      // fc-prev-buttonがクリックされたときの処理
       fetchDataAndUpdate();
     });
 
   document
     .getElementsByClassName("fc-next-button")[0]
     .addEventListener("click", function () {
-      // fc-next-buttonがクリックされたときの処理
       fetchDataAndUpdate();
     });
 
   window.addEventListener("load", function () {
     if (window.location.pathname === "/") {
-      console.log(1);
       fetchDataAndUpdate();
     }
   });
 
-  // 前月や次月が表示されたときの処理
   function fetchDataAndUpdate() {
-    // カレンダーのタイトルを取得
     let calendarTitle = calendar.view.title;
 
     let [year, month] = calendarTitle.split("年");
-    console.log(calendarTitle.split(" "));
-    console.log(parseInt(year));
-    console.log(parseInt(month));
 
-    // サーバーからデータを取得
     fetchDataFromServer(parseInt(year), parseInt(month))
       .then((data) => {
-        // 月ごとの支出額と収入額を更新
         updateAmounts(data.totalExpense, data.totalIncome);
       })
       .catch((error) => {
@@ -201,13 +183,12 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  // サーバーからデータを取得する関数（先ほどと同じものを使用）
   function fetchDataFromServer(year, month) {
-    return fetch(`/api/v1/data/${year}/${month}`) // サーバーのAPIエンドポイントに合わせて変更
-      .then((response) => response.json());
+    return fetch(`/api/v1/data/${year}/${month}`).then((response) =>
+      response.json()
+    );
   }
 
-  // 月ごとの支出額と収入額を更新する関数（先ほどと同じものを使用）
   function updateAmounts(expenseAmount, incomeAmount) {
     document.getElementById("expenseAmount").textContent = expenseAmount + "円";
     document.getElementById("incomeAmount").textContent = incomeAmount + "円";

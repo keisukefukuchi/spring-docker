@@ -27,7 +27,6 @@
         <h1 class="payment-type-title">支払い系統一覧</h1>
 
         <div class="payment-type-register-button">
-          <!-- Add New PaymentType Button -->
           <input
             type="button"
             id="openBtn"
@@ -37,14 +36,11 @@
         </div>
       </div>
 
-      <!-- Display the list of categories -->
       <ul th:each="paymentType : ${paymentTypes}">
         <li class="payment-type-list">
           <p th:text="${paymentType.name}"></p>
 
           <div class="payment-type-buttons">
-            <!-- Edit Button -->
-            <!-- Delete Button -->
             <form
               th:action="@{'/editPaymentType/' + ${paymentType.paymentTypeId}}"
               method="post"
@@ -52,8 +48,6 @@
             >
               <button type="submit" class="btn btn-primary">編集</button>
             </form>
-
-            <!-- Delete Button -->
             <form
               th:action="@{'/deletePaymentType/' + ${paymentType.paymentTypeId}}"
               method="post"
@@ -82,12 +76,9 @@
               th:object="${paymentType}"
               method="post"
             >
-              <!-- Name field -->
               <label for="name">支払い系統名:</label>
               <input type="text" id="name" th:field="*{name}" required />
-
               <div class="button-position">
-                <!-- Submit button -->
                 <button type="submit">追加</button>
               </div>
             </form>

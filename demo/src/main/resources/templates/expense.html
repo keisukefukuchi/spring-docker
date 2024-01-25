@@ -5,7 +5,6 @@
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/expense.css}" rel="stylesheet" />
     <link th:href="@{/css/pagination.css}" rel="stylesheet" />
-
   </head>
   <body>
     <div class="header">
@@ -29,7 +28,6 @@
         <h1 class="expense-title">支出一覧</h1>
 
         <div class="expense-register-button">
-          <!-- Add New Category Button -->
           <input
             type="button"
             id="openBtn"
@@ -38,37 +36,53 @@
           />
         </div>
       </div>
-      <!-- Pagination -->
       <div class="pagination">
         <ul>
-          <li th:if="${currentPage > 0}" th:class="${currentPage == 0} ? 'disabled' : ''">
-            <a th:href="@{'/expense?page=' + (${currentPage - 1}) + '&size=' + ${size}}" aria-label="Previous">
+          <li
+            th:if="${currentPage > 0}"
+            th:class="${currentPage == 0} ? 'disabled' : ''"
+          >
+            <a
+              th:href="@{'/expense?page=' + (${currentPage - 1}) + '&size=' + ${size}}"
+              aria-label="Previous"
+            >
               前へ
             </a>
           </li>
-          <li th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}" th:class="${pageNumber == currentPage} ? 'active' : ''">
-            <a th:if="${pageNumber != currentPage}" th:href="@{'/expense?page=' + ${pageNumber} + '&size=' + ${size}}" th:text="${pageNumber + 1}"></a>
-            <span th:if="${pageNumber == currentPage}" th:text="${pageNumber + 1}"></span>
+          <li
+            th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+            th:class="${pageNumber == currentPage} ? 'active' : ''"
+          >
+            <a
+              th:if="${pageNumber != currentPage}"
+              th:href="@{'/expense?page=' + ${pageNumber} + '&size=' + ${size}}"
+              th:text="${pageNumber + 1}"
+            ></a>
+            <span
+              th:if="${pageNumber == currentPage}"
+              th:text="${pageNumber + 1}"
+            ></span>
           </li>
-          <li th:if="${currentPage < totalPages - 1}" th:class="${currentPage == totalPages - 1} ? 'disabled' : ''">
-            <a th:href="@{'/expense?page=' + (${currentPage + 1}) + '&size=' + ${size}}" aria-label="Next">
+          <li
+            th:if="${currentPage < totalPages - 1}"
+            th:class="${currentPage == totalPages - 1} ? 'disabled' : ''"
+          >
+            <a
+              th:href="@{'/expense?page=' + (${currentPage + 1}) + '&size=' + ${size}}"
+              aria-label="Next"
+            >
               次へ
             </a>
           </li>
         </ul>
       </div>
 
-
-      <!-- Display the list of categories -->
       <ul th:each="expense : ${expenses}">
         <li class="expense-list">
           <p th:text="${expense.date}"></p>
           <p th:text="${expense.name}"></p>
           <p th:text="${expense.price}"></p>
-
           <div class="expense-buttons">
-            <!-- Edit Button -->
-            <!-- Delete Button -->
             <form
               th:action="@{'/editExpense/' + ${expense.expenseId}}"
               method="post"
@@ -76,8 +90,6 @@
             >
               <button type="submit" class="btn btn-primary">編集</button>
             </form>
-
-            <!-- Delete Button -->
             <form
               th:action="@{'/deleteExpense/' + ${expense.expenseId}}"
               method="post"
@@ -108,10 +120,8 @@
             >
               <label for="expenseDate">登録日</label>
               <input type="date" id="expenseDate" th:field="*{date}" required />
-              <!-- Name field -->
               <label for="name">支出名:</label>
               <input type="text" id="name" th:field="*{name}" required />
-              <!-- Expense Category -->
               <div class="label-container">
                 <label class="category-label" for="expenseCategory"
                   >カテゴリー</label
@@ -130,7 +140,6 @@
                 </select>
               </div>
 
-              <!-- Payment Type -->
               <div class="label-container">
                 <label class="payment-type-label" for="paymentType"
                   >支払い系統</label
@@ -149,7 +158,6 @@
                 </select>
               </div>
 
-              <!-- Expense Amount -->
               <label for="expenseAmount">料金</label>
               <input
                 type="number"
@@ -158,7 +166,6 @@
                 required
               />
               <div class="button-position">
-                <!-- Submit button -->
                 <button type="submit">追加</button>
               </div>
             </form>

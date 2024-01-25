@@ -27,7 +27,6 @@
         <h1 class="category-title">カテゴリー一覧</h1>
 
         <div class="category-register-button">
-          <!-- Add New Category Button -->
           <input
             type="button"
             id="openBtn"
@@ -37,14 +36,10 @@
         </div>
       </div>
 
-      <!-- Display the list of categories -->
       <ul th:each="category : ${categories}">
         <li class="category-list">
           <p th:text="${category.name}"></p>
-
           <div class="category-buttons">
-            <!-- Edit Button -->
-            <!-- Delete Button -->
             <form
               th:action="@{'/editCategory/' + ${category.categoryId}}"
               method="post"
@@ -52,8 +47,6 @@
             >
               <button type="submit" class="btn btn-primary">編集</button>
             </form>
-
-            <!-- Delete Button -->
             <form
               th:action="@{'/deleteCategory/' + ${category.categoryId}}"
               method="post"
@@ -82,12 +75,10 @@
               th:object="${category}"
               method="post"
             >
-              <!-- Name field -->
               <label for="name">カテゴリー名:</label>
               <input type="text" id="name" th:field="*{name}" required />
 
               <div class="button-position">
-                <!-- Submit button -->
                 <button type="submit">追加</button>
               </div>
             </form>

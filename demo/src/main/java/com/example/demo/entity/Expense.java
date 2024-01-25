@@ -1,40 +1,40 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-
 import java.time.LocalDate;
 import java.util.UUID;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
 @Setter
 @Table(name = "expenses")
 public class Expense {
-    @Id
-    @Column(name = "expense_id")
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID expenseId;
 
-    @Column(name = "category_id")
-    private UUID categoryId;
+  @Id
+  @Column(name = "expense_id")
+  @GeneratedValue(strategy = GenerationType.AUTO)
+  private UUID expenseId;
 
-    @Column(name = "payment_type_id")
-    private UUID paymentTypeId;
+  @Column(name = "category_id")
+  private UUID categoryId;
 
-    @Column(name = "price")
-    private int price;
+  @Column(name = "payment_type_id")
+  private UUID paymentTypeId;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "price")
+  private int price;
 
-    @Column(name = "date")
-    private LocalDate date;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "created_at")
-    private LocalDate createdAt;
+  @Column(name = "date")
+  private LocalDate date;
 
-    @Column(name = "updated_at")
-    private LocalDate updatedAt;
+  @Column(name = "created_at")
+  private LocalDate createdAt;
+
+  @Column(name = "updated_at")
+  private LocalDate updatedAt;
 }
