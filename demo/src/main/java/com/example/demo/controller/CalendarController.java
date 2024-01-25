@@ -10,6 +10,7 @@ import com.example.demo.service.expense.ExpenseService;
 import com.example.demo.service.income.IncomeService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,11 +52,19 @@ public class CalendarController {
     }
 
     @GetMapping("/expense")
-    public String showExpense(Model model) {
+    public String showExpense(Model model,
+                              @RequestParam(defaultValue = "0") int page,
+                              @RequestParam(defaultValue = "8") int size) {
+        Page<Expense> expensePage = expenseService.getExpensesByPage(page, size);
+
         model.addAttribute("expense", new Expense());
-        model.addAttribute("expenses", expenseService.getAllExpenses());
+        model.addAttribute("expenses", expensePage.getContent());
         model.addAttribute("categories", categoryService.getAllCategories());
         model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
+        model.addAttribute("currentPage", page);
+        model.addAttribute("size", size);
+        model.addAttribute("totalPages", expensePage.getTotalPages());
+
         return "expense";
     }
 

@@ -3,6 +3,7 @@ package com.example.demo.service.expense;
 // ExpenseService.java
 import com.example.demo.entity.Expense;
 import com.example.demo.entity.Income;
+import org.springframework.data.domain.Page;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
@@ -13,6 +14,8 @@ import java.util.UUID;
 
 public interface ExpenseService {
     List<Expense> getAllExpenses();
+
+    Page<Expense> getExpensesByPage(int page, int size);
 
     Expense getExpenseById(UUID id);
 
