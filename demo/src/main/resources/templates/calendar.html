@@ -45,17 +45,26 @@
             <h2 id="date"></h2>
             <span id="closeBtn" class="closeBtn batsu"></span>
 
-            <div class="tab-wrap">
-              <input id="expense-tab" type="radio" name="tab" class="tab-switch" checked="checked" />
-              <label class="tab-label" for="expense-tab">支出</label>
-              <div id="day-expense" class="tab-content">
 
-              </div>
-              <input id="income-tab" type="radio" name="tab" class="tab-switch" />
-              <label class="tab-label" for="income-tab">収入</label>
-              <div id="day-income" class="tab-content">
-
-              </div>
+            <div class="tabs">
+              <input id="expense" type="radio" name="tab_item" checked>
+              <label class="tab_item" for="expense">支出</label>
+              <input id="income" type="radio" name="tab_item">
+              <label class="tab_item" for="income">収入</label>
+              <table id="expense_content" class="tab_content">
+                <tr class="expense_box">
+                  <th class="expense_head">支出名</th>
+                  <th class="expense_head">金額</th>
+                  <th class="expense_head">支払い系統</th>
+                  <th class="expense_head">カテゴリー</th>
+                </tr>
+              </table>
+              <table id="income_content" class="tab_content">
+                <tr class="income_box">
+                  <th class="income_head">収入名</th>
+                  <th class="income_head">金額</th>
+                </tr>
+              </table>
             </div>
           </div>
         </div>

@@ -3,8 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let modal = document.getElementById("modal");
   let dateInput = document.getElementById("date");
   const closeBtn = document.getElementById("closeBtn");
-  let incomeContainer = document.getElementById("day-income");
-  let expenseContainer = document.getElementById("day-expense");
+  let incomeTable = document.getElementById("income_content");
+  let expenseTable = document.getElementById("expense_content");
 
   let calendar = new FullCalendar.Calendar(calendarEl, {
     locale: "ja",
@@ -44,18 +44,35 @@ document.addEventListener("DOMContentLoaded", function () {
 
       let [year, month, day] = info.dateStr.split("-");
 
+      // 2番目以降の要素を削除
+      let incomeSecondElement = incomeTable.querySelectorAll("tr:nth-child(n+2)"); // 2番目以降の全ての要素
+      if(incomeSecondElement) {
+        incomeSecondElement.forEach((element) => {
+           incomeTable.removeChild(element);
+        });
+      }
+
+      // 2番目以降の要素を削除
+      let expenseSecondElement = expenseTable.querySelectorAll("tr:nth-child(n+2)"); // 2番目以降の全ての要素
+      if(expenseSecondElement) {
+        expenseSecondElement.forEach((element) => {
+           expenseTable.removeChild(element);
+        });
+      }
+
+
       // サーバーからデータを取得
       fetchTheDayData(parseInt(year), parseInt(month), parseInt(day))
         .then((data) => {
+          console.log(data);
           data.forEach((entry) => {
-            console.log(entry);
             if (entry.type === "income") {
               // 収入データの処理
-              let incomeElement = document.createElement("ul");
-              let nameElement = document.createElement("li");
-              let priceElement = document.createElement("li");
+              let incomeElement = document.createElement("tr");
+              let nameElement = document.createElement("td");
+              let priceElement = document.createElement("td");
 
-              incomeElement.classList.add("income-list")
+              incomeElement.classList.add("income_box");
               nameElement.classList.add("income-name");
               priceElement.classList.add("income-price");
 
@@ -64,21 +81,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
               incomeElement.appendChild(nameElement);
               incomeElement.appendChild(priceElement);
-              incomeContainer.appendChild(incomeElement);
-
+              incomeTable.appendChild(incomeElement);
             } else if (entry.type === "expense") {
               // 支出データの処理
-              let expenseElement = document.createElement("ul");
-              let nameElement = document.createElement("li");
-              let priceElement = document.createElement("li");
-              let paymentTypeElement = document.createElement("li");
-              let categoryElement = document.createElement("li");
+              let expenseElement = document.createElement("tr");
+              let nameElement = document.createElement("td");
+              let priceElement = document.createElement("td");
+              let paymentTypeElement = document.createElement("td");
+              let categoryElement = document.createElement("td");
 
-              incomeElement.classList.add("income-list")
-              nameElement.classList.add("income-name");
-              priceElement.classList.add("income-price");
-              paymentTypeElement.classList.add("income-payment-type");
-              categoryElement.classList.add("income-category");
+              expenseElement.classList.add("expense_box");
+              nameElement.classList.add("expense-name");
+              priceElement.classList.add("expense-price");
+              paymentTypeElement.classList.add("expense-payment-type");
+              categoryElement.classList.add("expense-category");
 
               nameElement.textContent = entry.theDayExpenseName;
               priceElement.textContent = entry.theDayExpensePrice;
@@ -89,7 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
               expenseElement.appendChild(priceElement);
               expenseElement.appendChild(paymentTypeElement);
               expenseElement.appendChild(categoryElement);
-              expenseContainer.appendChild(expenseElement);
+              expenseTable.appendChild(expenseElement);
             }
           });
         })

@@ -124,7 +124,6 @@
 
 .modal__content-inner {
     background-color: white;
-    width: 500px;
     text-align: center;
     padding: 10px 50px 50px 50px;
     position: relative;
@@ -177,56 +176,104 @@
 }
 
 /* tab */
-.tab-wrap {
-  display: flex;
-  flex-wrap: wrap;
-  margin:20px 0;
+/*タブ切り替え全体のスタイル*/
+.tabs {
+    margin-top: 50px;
+    padding-bottom: 40px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    width: 700px;
+    margin: 0 auto;
 }
-.tab-wrap:after {
-  content: '';
-  width: 100%;
-  height: 3px;
-  background: DeepSkyBlue;
-  display: block;
-  order: -1;
+
+/*タブのスタイル*/
+.tab_item {
+    width: calc(100%/2);
+    height: 50px;
+    border-bottom: 3px solid #5ab4bd;
+    background-color: #d9d9d9;
+    line-height: 50px;
+    font-size: 16px;
+    text-align: center;
+    color: #565656;
+    display: block;
+    float: left;
+    text-align: center;
+    font-weight: bold;
+    transition: all 0.2s ease;
 }
-.tab-label {
-  color: White;
-  background: LightGray;
-  font-weight: bold;
-  text-shadow: 0 -1px 0 rgba(0,0,0,.2);
-  white-space: nowrap;
-  text-align: center;
-  padding: 10px .5em;
-  order: -1;
-  position: relative;
-  z-index: 1;
-  cursor: pointer;
-  border-radius: 5px 5px 0 0;
-  flex: 1;
+
+.tab_item:hover {
+    opacity: 0.75;
 }
-.tab-label:not(:last-of-type) {
-  margin-right: 5px;
+
+/*ラジオボタンを全て消す*/
+input[name="tab_item"] {
+    display: none;
 }
-.tab-content {
-  width: 100%;
-  height: 0;
-  overflow: hidden;
-  opacity: 0;
+
+/*タブ切り替えの中身のスタイル*/
+.tab_content {
+    display: none;
+    padding: 40px 40px 0;
+    clear: both;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border-collapse: collapse;
+    margin-top: 10px;
+    width: 100%;
+    table-layout: fixed;
 }
-/* アクティブなタブ */
-.tab-switch:checked+.tab-label {
-  background: DeepSkyBlue;
+
+/*選択されているタブのコンテンツのみを表示*/
+#expense:checked~#expense_content,
+#income:checked~#income_content {
+    display: block;
 }
-.tab-switch:checked+.tab-label+.tab-content {
-  height: auto;
-  overflow: auto;
-  padding: 15px;
-  opacity: 1;
-  transition: .5s opacity;
-  box-shadow: 0 0 3px rgba(0,0,0,.2);
+
+/*選択されているタブのスタイルを変える*/
+.tabs input:checked+.tab_item {
+    background-color: #5ab4bd;
+    color: #fff;
 }
-/* ラジオボタン非表示 */
-.tab-switch {
-  display: none;
+
+
+/* 共通の行ボックススタイル */
+.expense_box,
+.income_box {
+    text-align: center;
+}
+
+/* ヘッダのスタイル */
+.expense_head {
+    width: 1000px;
+    background-color: #f2f2f2;
+    /* 行ボックスの背景色を設定 */
+    padding: 10px;
+}
+
+.income_head {
+    width: 1000px;
+    background-color: #f2f2f2;
+    /* 行ボックスの背景色を設定 */
+    padding: 10px;
+}
+
+/* データセルのスタイル */
+.expense_box td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    /* データ行の下にボーダーを設定 */
+}
+
+.income_box td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    /* データ行の下にボーダーを設定 */
+}
+
+/* 最後のデータ行のボーダーを削除 */
+.expense_box tr:last-child td,
+.income_box tr:last-child td {
+    border-bottom: none;
 }
