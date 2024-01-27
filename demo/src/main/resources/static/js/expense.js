@@ -81,8 +81,8 @@ function createEditExpenseForm(
 
   createInputField("date", "editExpenseDate", "登録日", date, true, null, form);
   createInputField("text", "editName", "支出名", name, true, null, form);
-  createInputField("select", "editExpenseCategoryId", "カテゴリー", categoryName, true, categoryList, form);
-  createInputField("select", "editExpensePaymentTypeId", "支払い系統", paymentTypeName, true, paymentTypeList, form);
+  createInputField("select", "editExpenseCategoryName", "カテゴリー", categoryName, true, categoryList, form);
+  createInputField("select", "editExpensePaymentTypeName", "支払い系統", paymentTypeName, true, paymentTypeList, form);
   createInputField("number", "editExpenseAmount", "金額", price, true, null, form);
 
   let buttonContainer = document.createElement("div");
@@ -105,12 +105,16 @@ function createEditExpenseForm(
   let editModal = document.getElementById("edit-modal");
 
   editOpenBtn.addEventListener("click", () => {
-    editModal.style.display = "block";
+    if (editModal) {
+      editModal.style.display = "block";
+    }
   });
 
   editCloseBtn.addEventListener("click", () => {
     let parentElement = editModal.parentElement;
-    parentElement.removeChild(editModal);
+    if (parentElement) {
+      parentElement.removeChild(editModal);
+    }
   });
 
   window.addEventListener("click", (e) => {
@@ -119,7 +123,9 @@ function createEditExpenseForm(
       e.target.id !== "edit-openBtn"
     ) {
       let parentElement = editModal.parentElement;
-      parentElement.removeChild(editModal);
+      if (parentElement) {
+        parentElement.removeChild(editModal);
+      }
     }
   });
 }
