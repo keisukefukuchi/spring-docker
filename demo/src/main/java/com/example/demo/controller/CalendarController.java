@@ -8,7 +8,6 @@ import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.expense.ExpenseService;
 import com.example.demo.service.income.IncomeService;
 import com.example.demo.service.paymentType.PaymentTypeService;
-
 import java.time.LocalDate;
 import java.util.Optional;
 import java.util.UUID;
@@ -78,14 +77,15 @@ public class CalendarController {
 
   @PostMapping("/edit/expense/{expenseId}")
   public String editExpense(
-          @PathVariable String expenseId,
-          @RequestParam(name = "editExpenseDate") LocalDate editExpenseDate,
-          @RequestParam(name = "editName") String editName,
-          @RequestParam(name = "editExpenseCategoryId") String editExpenseCategoryId,
-          @RequestParam(name = "editExpensePaymentTypeId") String editExpensePaymentTypeId,
-          @RequestParam(name = "editExpenseAmount") Integer editExpenseAmount
+    @PathVariable String expenseId,
+    @RequestParam(name = "editExpenseDate") LocalDate editExpenseDate,
+    @RequestParam(name = "editName") String editName,
+    @RequestParam(name = "editExpenseCategoryId") String editExpenseCategoryId,
+    @RequestParam(
+      name = "editExpensePaymentTypeId"
+    ) String editExpensePaymentTypeId,
+    @RequestParam(name = "editExpenseAmount") Integer editExpenseAmount
   ) {
-
     Expense expense = expenseService.getExpenseById(UUID.fromString(expenseId));
     expense.setDate(editExpenseDate);
     expense.setName(editName);
@@ -111,12 +111,18 @@ public class CalendarController {
     return "income";
   }
 
+  @PostMapping("/income")
+  public String addIncome(@ModelAttribute Income income) {
+    incomeService.saveIncome(income);
+    return "redirect:/income";
+  }
+
   @PostMapping("/edit/income/{incomeId}")
   public String editIncome(
-          @PathVariable String incomeId,
-          @RequestParam(name = "editIncomeDate") LocalDate editIncomeDate,
-          @RequestParam(name = "editName") String editName,
-          @RequestParam(name = "editIncomeAmount") Integer editIncomeAmount
+    @PathVariable String incomeId,
+    @RequestParam(name = "editIncomeDate") LocalDate editIncomeDate,
+    @RequestParam(name = "editName") String editName,
+    @RequestParam(name = "editIncomeAmount") Integer editIncomeAmount
   ) {
     Income income = incomeService.getIncomeById(UUID.fromString(incomeId));
     income.setDate(editIncomeDate);
@@ -126,17 +132,24 @@ public class CalendarController {
     return "redirect:/income";
   }
 
-  @PostMapping("/income")
-  public String addIncome(@ModelAttribute Income income) {
-    incomeService.saveIncome(income);
-    return "redirect:/income";
-  }
-
   @GetMapping("/category")
   public String showCategory(Model model) {
     model.addAttribute("category", new Category());
     model.addAttribute("categories", categoryService.getAllCategories());
     return "category";
+  }
+
+  @PostMapping("/edit/category/{categoryId}")
+  public String editCategory(
+    @PathVariable String categoryId,
+    @RequestParam(name = "editCategoryName") String editCategoryName
+  ) {
+    Category category = categoryService.getCategoryById(
+      UUID.fromString(categoryId)
+    );
+    category.setName(editCategoryName);
+    categoryService.saveCategory(category);
+    return "redirect:/category";
   }
 
   @PostMapping("/category")

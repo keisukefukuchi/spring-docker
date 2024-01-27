@@ -40,13 +40,13 @@
         <li class="category-list">
           <p th:text="${category.name}"></p>
           <div class="category-buttons">
-            <form
-              th:action="@{'/editCategory/' + ${category.categoryId}}"
-              method="post"
-              style="display: inline"
-            >
-              <button type="submit" class="btn btn-primary">編集</button>
-            </form>
+            <input
+              type="submit"
+              id="edit-openBtn"
+              class="btn btn-primary edit-category"
+              th:attr="data-custom-data=${category.categoryId}"
+              value="編集"
+            />
             <form
               th:action="@{'/deleteCategory/' + ${category.categoryId}}"
               method="post"
