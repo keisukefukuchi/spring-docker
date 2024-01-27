@@ -149,11 +149,6 @@ dfn[title] {
   cursor: help;
 }
 
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
 hr {
   display: block;
   height: 1px;
