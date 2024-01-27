@@ -6,6 +6,9 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +24,17 @@ public class CategoryServiceImpl implements CategoryService {
   @Override
   public List<Category> getAllCategories() {
     return categoryRepository.findAll();
+  }
+
+  @Override
+  public Page<Category> getCategoriesByPage(int page, int size) {
+    PageRequest pageRequest = PageRequest.of(
+      page,
+      size,
+      Sort.by(Sort.Direction.DESC, "updatedAt")
+    );
+
+    return categoryRepository.findAll(pageRequest);
   }
 
   @Override

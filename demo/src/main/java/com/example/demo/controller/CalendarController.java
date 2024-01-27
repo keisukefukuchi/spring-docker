@@ -133,9 +133,20 @@ public class CalendarController {
   }
 
   @GetMapping("/category")
-  public String showCategory(Model model) {
+  public String showCategory(
+    Model model,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "8") int size
+  ) {
+    Page<Category> categoryPage = categoryService.getCategoriesByPage(
+      page,
+      size
+    );
+    model.addAttribute("currentPage", page);
+    model.addAttribute("size", size);
+    model.addAttribute("totalPages", categoryPage.getTotalPages());
     model.addAttribute("category", new Category());
-    model.addAttribute("categories", categoryService.getAllCategories());
+    model.addAttribute("categories", categoryPage.getContent());
     return "category";
   }
 

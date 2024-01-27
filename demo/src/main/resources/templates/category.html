@@ -4,6 +4,7 @@
     <title>Category List</title>
     <link th:href="@{/css/common.css}" rel="stylesheet" />
     <link th:href="@{/css/category.css}" rel="stylesheet" />
+    <link th:href="@{/css/pagination.css}" rel="stylesheet" />
   </head>
   <body>
     <div class="header">
@@ -25,7 +26,46 @@
     <div class="container">
       <div class="category-header">
         <h1 class="category-title">カテゴリー一覧</h1>
-
+        <div class="pagination">
+          <ul>
+            <li
+              th:if="${currentPage > 0}"
+              th:class="${currentPage == 0} ? 'disabled' : ''"
+            >
+              <a
+                th:href="@{'/category?page=' + (${currentPage - 1}) + '&size=' + ${size}}"
+                aria-label="Previous"
+              >
+                前へ
+              </a>
+            </li>
+            <li
+              th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+              th:class="${pageNumber == currentPage} ? 'active' : ''"
+            >
+              <a
+                th:if="${pageNumber != currentPage}"
+                th:href="@{'/category?page=' + ${pageNumber} + '&size=' + ${size}}"
+                th:text="${pageNumber + 1}"
+              ></a>
+              <span
+                th:if="${pageNumber == currentPage}"
+                th:text="${pageNumber + 1}"
+              ></span>
+            </li>
+            <li
+              th:if="${currentPage < totalPages - 1}"
+              th:class="${currentPage == totalPages - 1} ? 'disabled' : ''"
+            >
+              <a
+                th:href="@{'/category?page=' + (${currentPage + 1}) + '&size=' + ${size}}"
+                aria-label="Next"
+              >
+                次へ
+              </a>
+            </li>
+          </ul>
+        </div>
         <div class="category-register-button">
           <input
             type="button"
