@@ -2,9 +2,11 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.Category;
 import com.example.demo.entity.Expense;
+import com.example.demo.entity.Income;
 import com.example.demo.entity.PaymentType;
 import com.example.demo.service.category.CategoryService;
 import com.example.demo.service.expense.ExpenseService;
+import com.example.demo.service.income.IncomeService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -15,13 +17,19 @@ import java.util.*;
 @RequestMapping("/api/v1")
 public class RestApiController {
     private final ExpenseService expenseService;
+    private final IncomeService incomeService;
     private final CategoryService categoryService;
     private final PaymentTypeService paymentTypeService;
 
     @Autowired
-    public RestApiController(ExpenseService expenseService, CategoryService categoryService,
-                             PaymentTypeService paymentTypeService) {
+    public RestApiController(
+            ExpenseService expenseService,
+            IncomeService incomeService,
+            CategoryService categoryService,
+            PaymentTypeService paymentTypeService
+    ) {
         this.expenseService = expenseService;
+        this.incomeService = incomeService;
         this.categoryService = categoryService;
         this.paymentTypeService = paymentTypeService;
     }
@@ -57,5 +65,18 @@ public class RestApiController {
         result.put("paymentTypeList", paymentTypeIdNameMap);
 
         return result;
+    }
+
+    @GetMapping(value = "/edit/income/{incomeId}")
+    public Map<String, String> getIncomeById(@PathVariable String incomeId) {
+        Income incomeById = incomeService.getIncomeById(UUID.fromString(incomeId));
+
+        Map<String, String> incomeMap = new HashMap<>();
+        incomeMap.put("incomeId", String.valueOf(incomeById.getIncomeId()));
+        incomeMap.put("date", String.valueOf(incomeById.getDate()));
+        incomeMap.put("name", incomeById.getName());
+        incomeMap.put("price", String.valueOf(incomeById.getPrice()));
+
+        return incomeMap;
     }
 }

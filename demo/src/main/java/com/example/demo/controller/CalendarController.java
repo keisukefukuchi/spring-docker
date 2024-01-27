@@ -111,6 +111,21 @@ public class CalendarController {
     return "income";
   }
 
+  @PostMapping("/edit/income/{incomeId}")
+  public String editIncome(
+          @PathVariable String incomeId,
+          @RequestParam(name = "editIncomeDate") LocalDate editIncomeDate,
+          @RequestParam(name = "editName") String editName,
+          @RequestParam(name = "editIncomeAmount") Integer editIncomeAmount
+  ) {
+    Income income = incomeService.getIncomeById(UUID.fromString(incomeId));
+    income.setDate(editIncomeDate);
+    income.setName(editName);
+    income.setPrice(editIncomeAmount);
+    incomeService.saveIncome(income);
+    return "redirect:/income";
+  }
+
   @PostMapping("/income")
   public String addIncome(@ModelAttribute Income income) {
     incomeService.saveIncome(income);
