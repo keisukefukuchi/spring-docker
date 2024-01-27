@@ -170,9 +170,20 @@ public class CalendarController {
   }
 
   @GetMapping("/payment-type")
-  public String showPaymentType(Model model) {
+  public String showPaymentType(
+          Model model,
+          @RequestParam(defaultValue = "0") int page,
+          @RequestParam(defaultValue = "8") int size
+  ) {
+    Page<PaymentType> paymentTypePage = paymentTypeService.getpaymentTypesByPage(
+            page,
+            size
+    );
+    model.addAttribute("currentPage", page);
+    model.addAttribute("size", size);
+    model.addAttribute("totalPages", paymentTypePage.getTotalPages());
     model.addAttribute("paymentType", new PaymentType());
-    model.addAttribute("paymentTypes", paymentTypeService.getAllPaymentTypes());
+    model.addAttribute("paymentTypes", paymentTypePage.getContent());
     return "paymentType";
   }
 
