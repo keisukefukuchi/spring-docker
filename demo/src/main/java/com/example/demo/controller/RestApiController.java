@@ -96,4 +96,22 @@ public class RestApiController {
 
     return categoryMap;
   }
+
+  @GetMapping(value = "/edit/payment-type/{paymentTypeId}")
+  public Map<String, String> getPaymentTypeById(
+    @PathVariable String paymentTypeId
+  ) {
+    PaymentType paymentTypeById = paymentTypeService.getPaymentTypeById(
+      UUID.fromString(paymentTypeId)
+    );
+
+    Map<String, String> paymentTypeMap = new HashMap<>();
+    paymentTypeMap.put(
+      "paymentTypeId",
+      String.valueOf(paymentTypeById.getPaymentTypeId())
+    );
+    paymentTypeMap.put("name", paymentTypeById.getName());
+
+    return paymentTypeMap;
+  }
 }

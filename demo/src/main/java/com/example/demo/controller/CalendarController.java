@@ -150,6 +150,12 @@ public class CalendarController {
     return "category";
   }
 
+  @PostMapping("/category")
+  public String addCategory(@ModelAttribute Category category) {
+    categoryService.saveCategory(category);
+    return "redirect:/category";
+  }
+
   @PostMapping("/edit/category/{categoryId}")
   public String editCategory(
     @PathVariable String categoryId,
@@ -163,21 +169,15 @@ public class CalendarController {
     return "redirect:/category";
   }
 
-  @PostMapping("/category")
-  public String addCategory(@ModelAttribute Category category) {
-    categoryService.saveCategory(category);
-    return "redirect:/category";
-  }
-
   @GetMapping("/payment-type")
   public String showPaymentType(
-          Model model,
-          @RequestParam(defaultValue = "0") int page,
-          @RequestParam(defaultValue = "8") int size
+    Model model,
+    @RequestParam(defaultValue = "0") int page,
+    @RequestParam(defaultValue = "8") int size
   ) {
     Page<PaymentType> paymentTypePage = paymentTypeService.getpaymentTypesByPage(
-            page,
-            size
+      page,
+      size
     );
     model.addAttribute("currentPage", page);
     model.addAttribute("size", size);
@@ -189,6 +189,19 @@ public class CalendarController {
 
   @PostMapping("/payment-type")
   public String addPaymentType(@ModelAttribute PaymentType paymentType) {
+    paymentTypeService.savePaymentType(paymentType);
+    return "redirect:/payment-type";
+  }
+
+  @PostMapping("/edit/payment-type/{paymentTypeId}")
+  public String editPaymentType(
+    @PathVariable String paymentTypeId,
+    @RequestParam(name = "editPaymentTypeName") String editPaymentTypeName
+  ) {
+    PaymentType paymentType = paymentTypeService.getPaymentTypeById(
+      UUID.fromString(paymentTypeId)
+    );
+    paymentType.setName(editPaymentTypeName);
     paymentTypeService.savePaymentType(paymentType);
     return "redirect:/payment-type";
   }

@@ -56,8 +56,25 @@
     display: block;
 }
 
+.edit-openBtn {
+    display: block;
+}
+
 .modal {
     display: none;
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.edit-modal {
+    display: block;
     position: fixed;
     left: 0%;
     top: 0%;
@@ -124,7 +141,9 @@
 }
 
 .batsu::before,
-.batsu::after {
+.batsu::after,
+.edit-batsu::before,
+.edit-batsu::after {
     content: "";
     position: absolute;
     top: 30px;
@@ -136,10 +155,12 @@
     cursor: pointer;
 }
 
-.batsu::before {
+.batsu::before,
+.edit-batsu::before {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
-.batsu::after {
+.batsu::after,
+.edit-batsu::after {
     transform: translate(-50%, -50%) rotate(-45deg);
 }

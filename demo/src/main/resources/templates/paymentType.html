@@ -81,13 +81,13 @@
           <p th:text="${paymentType.name}"></p>
 
           <div class="payment-type-buttons">
-            <form
-              th:action="@{'/editPaymentType/' + ${paymentType.paymentTypeId}}"
-              method="post"
-              style="display: inline"
-            >
-              <button type="submit" class="btn btn-primary">編集</button>
-            </form>
+            <input
+              type="submit"
+              id="edit-openBtn"
+              class="btn btn-primary edit-payment-type"
+              th:attr="data-custom-data=${paymentType.paymentTypeId}"
+              value="編集"
+            />
             <form
               th:action="@{'/deletePaymentType/' + ${paymentType.paymentTypeId}}"
               method="post"
