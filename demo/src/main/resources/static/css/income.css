@@ -106,6 +106,33 @@
     margin-bottom: 40px;
 }
 
+.delete-modal {
+    display: none;
+    position: fixed;
+    left: 0%;
+    top: 0%;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.delete-modal .modal__content .modal__content-inner {
+    background-color: white;
+    width: 500px;
+    text-align: center;
+    padding: 20px 70px 70px;
+    position: relative;
+}
+
+.delete-modal .modal__content .button-flex {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 30px;
+}
+
 .income-form label {
     display: block;
     margin: 10px 0 20px;
@@ -134,7 +161,6 @@
     border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
-
 }
 
 .income-form button:hover {

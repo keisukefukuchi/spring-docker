@@ -140,6 +140,14 @@ public class CalendarController {
     return "redirect:/income";
   }
 
+  @PostMapping("/delete/income/{incomeId}")
+  public String deleteIncome(
+          @PathVariable String incomeId
+  ) {
+    incomeService.deleteIncome(UUID.fromString(incomeId));
+    return "redirect:/income";
+  }
+
   @GetMapping("/category")
   public String showCategory(
     Model model,
