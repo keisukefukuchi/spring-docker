@@ -103,18 +103,12 @@
             >
           </td>
           <td>
-            <form
-                    th:action="@{'/deleteExpense/' + ${expense.expenseId}}"
-                    method="post"
+            <input
+                    type="submit"
+                    class="btn btn-danger delete-openBtn"
+                    th:attr="delete-data=${expense.expenseId}"
+                    value="削除"
             >
-              <button
-                      type="submit"
-                      class="btn btn-danger"
-                      onclick="return confirm('Are you sure?')"
-              >
-                削除
-              </button>
-            </form>
           </td>
         </tr>
       </table>
@@ -181,6 +175,20 @@
                 <button type="submit">追加</button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+
+      <div id="delete-modal" class="delete-modal">
+        <div class="modal__content">
+          <div class="modal__content-inner">
+            <h2>本当に削除しますか？</h2>
+            <!-- No button, closes the modal -->
+            <div class="button-flex">
+              <button id="delete-closeBtn" type="button" class="btn btn-secondary" data-dismiss="modal">いいえ</button>
+
+            </div>
+
           </div>
         </div>
       </div>
