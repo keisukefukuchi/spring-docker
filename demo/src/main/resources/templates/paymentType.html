@@ -88,19 +88,12 @@
               th:attr="data-custom-data=${paymentType.paymentTypeId}"
               value="編集"
             />
-            <form
-              th:action="@{'/deletePaymentType/' + ${paymentType.paymentTypeId}}"
-              method="post"
-              style="display: inline"
+            <input
+                    type="submit"
+                    class="btn btn-danger delete-openBtn"
+                    th:attr="delete-data=${paymentType.paymentTypeId}"
+                    value="削除"
             >
-              <button
-                type="submit"
-                class="btn btn-danger"
-                onclick="return confirm('Are you sure?')"
-              >
-                削除
-              </button>
-            </form>
           </div>
         </li>
       </ul>
@@ -125,6 +118,21 @@
           </div>
         </div>
       </div>
+
+      <div id="delete-modal" class="delete-modal">
+        <div class="modal__content">
+          <div class="modal__content-inner">
+            <h2>本当に削除しますか？</h2>
+            <!-- No button, closes the modal -->
+            <div class="button-flex">
+              <button id="delete-closeBtn" type="button" class="btn btn-secondary" data-dismiss="modal">いいえ</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
     </div>
     <script th:src="@{/js/paymentType.js}"></script>
   </body>

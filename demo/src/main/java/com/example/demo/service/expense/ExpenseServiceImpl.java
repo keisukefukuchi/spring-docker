@@ -71,4 +71,10 @@ public class ExpenseServiceImpl implements ExpenseService {
     expenseRepository.deleteByCategoryId(CategoryId);
   }
 
+  @Override
+  @Transactional
+  public void deleteByPaymentTypeId(UUID paymentTypeId) {
+    expenseRepository.deleteByPaymentTypeId(paymentTypeId);
+  }
+
 }

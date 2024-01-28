@@ -32,4 +32,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, UUID> {
   );
 
   void deleteByCategoryId(UUID categoryId);
+
+  void deleteByPaymentTypeId(UUID paymentTypeId);
 }

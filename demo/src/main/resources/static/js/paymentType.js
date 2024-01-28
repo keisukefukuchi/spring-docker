@@ -121,3 +121,47 @@ function createInputField(type, id, name, value, required, form) {
   form.appendChild(label);
   form.appendChild(input);
 }
+
+let deleteCloseBtn = document.getElementById("delete-closeBtn");
+let deleteModal = document.getElementById("delete-modal");
+
+// 各ボタンに対してイベントリスナーを追加
+document.querySelectorAll(".delete-openBtn").forEach((btn) => {
+  btn.addEventListener("click", function() {
+    // クリックされたボタンに対する処理を行う
+      let deleteData = this.getAttribute("delete-data");
+      let buttonFlex = document.getElementsByClassName("button-flex")[0];
+
+      let childElements = buttonFlex.children;
+
+      // 子要素の数だけループ
+      for (let i = 0; i < childElements.length; i++) {
+        let childElement = childElements[i];
+        // 子要素が form タグであれば削除
+        if (childElement.tagName.toLowerCase() === "form") {
+          buttonFlex.removeChild(childElement);
+          break; // 1回削除すれば十分な場合はループを抜ける
+        }
+      }
+
+      let form = document.createElement("form");
+      form.classList.add("payment-type-form");
+      let baseUrl = "/delete/payment-type/";
+      form.action = baseUrl + deleteData;
+      form.method = "post";
+
+      let confirmDeleteBtn = document.createElement("button");
+      confirmDeleteBtn.setAttribute("type", "submit");
+      confirmDeleteBtn.setAttribute("class", "btn btn-danger");
+      confirmDeleteBtn.setAttribute("id", "confirmDeleteBtn");
+      confirmDeleteBtn.textContent = "はい";
+
+      form.appendChild(confirmDeleteBtn);
+      buttonFlex.appendChild(form);
+      deleteModal.style.display = "block";
+  });
+});
+
+deleteCloseBtn.addEventListener("click", () => {
+  deleteModal.style.display = "none";
+});

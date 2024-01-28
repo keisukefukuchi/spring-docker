@@ -230,4 +230,13 @@ public class CalendarController {
     paymentTypeService.savePaymentType(paymentType);
     return "redirect:/payment-type";
   }
+
+  @PostMapping("/delete/payment-type/{paymentTypeId}")
+  public String deletePaymentType(
+          @PathVariable String paymentTypeId
+  ) {
+    expenseService.deleteByPaymentTypeId(UUID.fromString(paymentTypeId));
+    paymentTypeService.deletePaymentType(UUID.fromString(paymentTypeId));
+    return "redirect:/payment-type";
+  }
 }
