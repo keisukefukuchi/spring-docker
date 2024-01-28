@@ -5,6 +5,8 @@ import com.example.demo.repository.ExpenseRepository;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
+
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -62,4 +64,11 @@ public class ExpenseServiceImpl implements ExpenseService {
   public void deleteExpense(UUID id) {
     expenseRepository.deleteById(id);
   }
+
+  @Override
+  @Transactional
+  public void deleteByCategoryId(UUID CategoryId) {
+    expenseRepository.deleteByCategoryId(CategoryId);
+  }
+
 }

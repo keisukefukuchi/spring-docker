@@ -19,4 +19,6 @@ public interface ExpenseService {
   void saveExpense(Expense expense);
 
   void deleteExpense(UUID id);
+
+  void deleteByCategoryId(UUID categoryId);
 }

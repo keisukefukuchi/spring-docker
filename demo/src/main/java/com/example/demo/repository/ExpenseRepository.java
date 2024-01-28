@@ -30,4 +30,6 @@ public interface ExpenseRepository extends JpaRepository<Expense, UUID> {
     @Param("month") int month,
     @Param("day") int day
   );
+
+  void deleteByCategoryId(UUID categoryId);
 }

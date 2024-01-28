@@ -185,6 +185,15 @@ public class CalendarController {
     return "redirect:/category";
   }
 
+  @PostMapping("/delete/category/{categoryId}")
+  public String deleteCategory(
+          @PathVariable String categoryId
+  ) {
+    expenseService.deleteByCategoryId(UUID.fromString(categoryId));
+    categoryService.deleteCategory(UUID.fromString(categoryId));
+    return "redirect:/category";
+  }
+
   @GetMapping("/payment-type")
   public String showPaymentType(
     Model model,
