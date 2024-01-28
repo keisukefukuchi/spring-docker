@@ -28,6 +28,8 @@
         <h1 class="income-title">収入一覧</h1>
         <div class="pagination">
           <ul>
+            <th:block th:if="${totalPages > 1 and totalPages * size <= totalElements}">
+
             <li
               th:if="${currentPage > 0}"
               th:class="${currentPage == 0} ? 'disabled' : ''"
@@ -64,6 +66,7 @@
                 次へ
               </a>
             </li>
+            </th:block>
           </ul>
         </div>
         <div class="income-register-button">
