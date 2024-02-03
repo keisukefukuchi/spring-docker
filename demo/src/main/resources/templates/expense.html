@@ -28,8 +28,7 @@
         <h1 class="expense-title">支出一覧</h1>
         <div class="pagination">
           <ul>
-            <th:block th:if="${totalPages > 1 and totalPages * size <= totalElements}">
-
+            <th:block th:if="${totalPages > 1}">
             <li
               th:if="${currentPage > 0}"
               th:class="${currentPage == 0} ? 'disabled' : ''"

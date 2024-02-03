@@ -28,7 +28,7 @@
         <h1 class="category-title">カテゴリー一覧</h1>
         <div class="pagination">
           <ul>
-            <th:block th:if="${totalPages > 1 and totalPages * size <= totalElements}">
+            <th:block th:if="${totalPages > 1}">
 
             <li
               th:if="${currentPage > 0}"

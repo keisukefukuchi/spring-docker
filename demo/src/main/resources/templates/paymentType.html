@@ -29,7 +29,7 @@
         <div class="pagination">
           <ul>
             <!-- ページネーション表示をやめる条件の追加 -->
-            <th:block th:if="${totalPages > 1 and totalPages * size <= totalElements}">
+            <th:block th:if="${totalPages > 1}">
               <li th:if="${currentPage > 0}"
                   th:class="${currentPage == 0} ? 'disabled' : ''">
                 <a th:href="@{'/payment-type?page=' + (${currentPage - 1}) + '&size=' + ${size}}"
