@@ -217,6 +217,5 @@
 
 .batsu::after,
 .edit-batsu::after {
-.edit-batsu::after {
     transform: translate(-50%, -50%) rotate(-45deg);
 }
