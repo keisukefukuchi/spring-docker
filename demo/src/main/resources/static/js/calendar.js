@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
               let expenseElement = document.createElement("tr");
               if (entry.noMessage) {
                 let noElement = document.createElement("td");
-                noElement.setAttribute("colspan", "2");
+                noElement.setAttribute("colspan", "4");
                 noElement.style.paddingTop = "30px";
                 noElement.textContent = entry.noMessage;
                 expenseElement.appendChild(noElement);
