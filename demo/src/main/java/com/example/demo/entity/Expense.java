@@ -20,15 +20,25 @@ public class Expense {
   @Column(name = "category_id")
   private UUID categoryId;
 
-  @ManyToOne()
-  @JoinColumn(name = "category_id", referencedColumnName = "category_id", insertable = false, updatable = false)
+  @ManyToOne
+  @JoinColumn(
+    name = "category_id",
+    referencedColumnName = "category_id",
+    insertable = false,
+    updatable = false
+  )
   private Category category;
 
   @Column(name = "payment_type_id")
   private UUID paymentTypeId;
 
-  @ManyToOne()
-  @JoinColumn(name = "payment_type_id", referencedColumnName = "payment_type_id", insertable = false, updatable = false)
+  @ManyToOne
+  @JoinColumn(
+    name = "payment_type_id",
+    referencedColumnName = "payment_type_id",
+    insertable = false,
+    updatable = false
+  )
   private PaymentType paymentType;
 
   @Column(name = "price")

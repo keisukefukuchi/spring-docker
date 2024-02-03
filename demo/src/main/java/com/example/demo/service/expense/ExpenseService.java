@@ -23,5 +23,4 @@ public interface ExpenseService {
   void deleteByCategoryId(UUID categoryId);
 
   void deleteByPaymentTypeId(UUID paymentTypeId);
-
 }

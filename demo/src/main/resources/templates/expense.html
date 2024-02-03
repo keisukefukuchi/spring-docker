@@ -29,42 +29,42 @@
         <div class="pagination">
           <ul>
             <th:block th:if="${totalPages > 1}">
-            <li
-              th:if="${currentPage > 0}"
-              th:class="${currentPage == 0} ? 'disabled' : ''"
-            >
-              <a
-                th:href="@{'/expense?page=' + (${currentPage - 1}) + '&size=' + ${size}}"
-                aria-label="Previous"
+              <li
+                th:if="${currentPage > 0}"
+                th:class="${currentPage == 0} ? 'disabled' : ''"
               >
-                前へ
-              </a>
-            </li>
-            <li
-              th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
-              th:class="${pageNumber == currentPage} ? 'active' : ''"
-            >
-              <a
-                th:if="${pageNumber != currentPage}"
-                th:href="@{'/expense?page=' + ${pageNumber} + '&size=' + ${size}}"
-                th:text="${pageNumber + 1}"
-              ></a>
-              <span
-                th:if="${pageNumber == currentPage}"
-                th:text="${pageNumber + 1}"
-              ></span>
-            </li>
-            <li
-              th:if="${currentPage < totalPages - 1}"
-              th:class="${currentPage == totalPages - 1} ? 'disabled' : ''"
-            >
-              <a
-                th:href="@{'/expense?page=' + (${currentPage + 1}) + '&size=' + ${size}}"
-                aria-label="Next"
+                <a
+                  th:href="@{'/expense?page=' + (${currentPage - 1}) + '&size=' + ${size}}"
+                  aria-label="Previous"
+                >
+                  前へ
+                </a>
+              </li>
+              <li
+                th:each="pageNumber : ${#numbers.sequence(0, totalPages - 1)}"
+                th:class="${pageNumber == currentPage} ? 'active' : ''"
               >
-                次へ
-              </a>
-            </li>
+                <a
+                  th:if="${pageNumber != currentPage}"
+                  th:href="@{'/expense?page=' + ${pageNumber} + '&size=' + ${size}}"
+                  th:text="${pageNumber + 1}"
+                ></a>
+                <span
+                  th:if="${pageNumber == currentPage}"
+                  th:text="${pageNumber + 1}"
+                ></span>
+              </li>
+              <li
+                th:if="${currentPage < totalPages - 1}"
+                th:class="${currentPage == totalPages - 1} ? 'disabled' : ''"
+              >
+                <a
+                  th:href="@{'/expense?page=' + (${currentPage + 1}) + '&size=' + ${size}}"
+                  aria-label="Next"
+                >
+                  次へ
+                </a>
+              </li>
             </th:block>
           </ul>
         </div>
@@ -97,20 +97,20 @@
           <td th:text="${expense.paymentType.name}"></td>
           <td class="expense-buttons">
             <input
-                    type="submit"
-                    id="edit-openBtn"
-                    class="btn btn-primary edit-expense"
-                    th:attr="data-custom-data=${expense.expenseId}"
-                    value="編集"
-            >
+              type="submit"
+              id="edit-openBtn"
+              class="btn btn-primary edit-expense"
+              th:attr="data-custom-data=${expense.expenseId}"
+              value="編集"
+            />
           </td>
           <td>
             <input
-                    type="submit"
-                    class="btn btn-danger delete-openBtn"
-                    th:attr="delete-data=${expense.expenseId}"
-                    value="削除"
-            >
+              type="submit"
+              class="btn btn-danger delete-openBtn"
+              th:attr="delete-data=${expense.expenseId}"
+              value="削除"
+            />
           </td>
         </tr>
       </table>
@@ -185,16 +185,19 @@
         <div class="modal__content">
           <div class="modal__content-inner">
             <h2>本当に削除しますか？</h2>
-            <!-- No button, closes the modal -->
             <div class="button-flex">
-              <button id="delete-closeBtn" type="button" class="btn btn-secondary" data-dismiss="modal">いいえ</button>
-
+              <button
+                id="delete-closeBtn"
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                いいえ
+              </button>
             </div>
-
           </div>
         </div>
       </div>
-
     </div>
     <script th:src="@{/js/expense.js}"></script>
   </body>

@@ -28,11 +28,11 @@ public class PaymentTypeServiceImpl implements PaymentTypeService {
   }
 
   @Override
-  public Page<PaymentType> getpaymentTypesByPage(int page, int size) {
+  public Page<PaymentType> getPaymentTypesByPage(int page, int size) {
     PageRequest pageRequest = PageRequest.of(
-            page,
-            size,
-            Sort.by(Sort.Direction.DESC, "updatedAt")
+      page,
+      size,
+      Sort.by(Sort.Direction.DESC, "updatedAt")
     );
     return paymentTypeRepository.findAll(pageRequest);
   }

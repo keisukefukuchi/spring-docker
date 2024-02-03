@@ -9,7 +9,6 @@ import com.example.demo.service.expense.ExpenseService;
 import com.example.demo.service.income.IncomeService;
 import com.example.demo.service.paymentType.PaymentTypeService;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -97,9 +96,7 @@ public class CalendarController {
   }
 
   @PostMapping("/delete/expense/{expenseId}")
-  public String deleteExpense(
-    @PathVariable String expenseId
-  ) {
+  public String deleteExpense(@PathVariable String expenseId) {
     expenseService.deleteExpense(UUID.fromString(expenseId));
     return "redirect:/expense";
   }
@@ -141,9 +138,7 @@ public class CalendarController {
   }
 
   @PostMapping("/delete/income/{incomeId}")
-  public String deleteIncome(
-          @PathVariable String incomeId
-  ) {
+  public String deleteIncome(@PathVariable String incomeId) {
     incomeService.deleteIncome(UUID.fromString(incomeId));
     return "redirect:/income";
   }
@@ -186,9 +181,7 @@ public class CalendarController {
   }
 
   @PostMapping("/delete/category/{categoryId}")
-  public String deleteCategory(
-          @PathVariable String categoryId
-  ) {
+  public String deleteCategory(@PathVariable String categoryId) {
     expenseService.deleteByCategoryId(UUID.fromString(categoryId));
     categoryService.deleteCategory(UUID.fromString(categoryId));
     return "redirect:/category";
@@ -200,7 +193,7 @@ public class CalendarController {
     @RequestParam(defaultValue = "0") int page,
     @RequestParam(defaultValue = "8") int size
   ) {
-    Page<PaymentType> paymentTypePage = paymentTypeService.getpaymentTypesByPage(
+    Page<PaymentType> paymentTypePage = paymentTypeService.getPaymentTypesByPage(
       page,
       size
     );
@@ -232,9 +225,7 @@ public class CalendarController {
   }
 
   @PostMapping("/delete/payment-type/{paymentTypeId}")
-  public String deletePaymentType(
-          @PathVariable String paymentTypeId
-  ) {
+  public String deletePaymentType(@PathVariable String paymentTypeId) {
     expenseService.deleteByPaymentTypeId(UUID.fromString(paymentTypeId));
     paymentTypeService.deletePaymentType(UUID.fromString(paymentTypeId));
     return "redirect:/payment-type";

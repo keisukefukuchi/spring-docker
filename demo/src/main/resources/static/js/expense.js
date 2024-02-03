@@ -81,9 +81,33 @@ function createEditExpenseForm(
 
   createInputField("date", "editExpenseDate", "登録日", date, true, null, form);
   createInputField("text", "editName", "支出名", name, true, null, form);
-  createInputField("select", "editExpenseCategoryId", "カテゴリー", categoryName, true, categoryList, form);
-  createInputField("select", "editExpensePaymentTypeId", "支払い系統", paymentTypeName, true, paymentTypeList, form);
-  createInputField("number", "editExpenseAmount", "金額", price, true, null, form);
+  createInputField(
+    "select",
+    "editExpenseCategoryId",
+    "カテゴリー",
+    categoryName,
+    true,
+    categoryList,
+    form
+  );
+  createInputField(
+    "select",
+    "editExpensePaymentTypeId",
+    "支払い系統",
+    paymentTypeName,
+    true,
+    paymentTypeList,
+    form
+  );
+  createInputField(
+    "number",
+    "editExpenseAmount",
+    "金額",
+    price,
+    true,
+    null,
+    form
+  );
 
   let buttonContainer = document.createElement("div");
   buttonContainer.classList.add("button-position");
@@ -174,41 +198,40 @@ function createInputField(type, id, name, value, required, list, form) {
 let deleteCloseBtn = document.getElementById("delete-closeBtn");
 let deleteModal = document.getElementById("delete-modal");
 
-
 // 各ボタンに対してイベントリスナーを追加
 document.querySelectorAll(".delete-openBtn").forEach((btn) => {
-  btn.addEventListener("click", function() {
+  btn.addEventListener("click", function () {
     // クリックされたボタンに対する処理を行う
-      let deleteData = this.getAttribute("delete-data");
-      let buttonFlex = document.getElementsByClassName("button-flex")[0];
+    let deleteData = this.getAttribute("delete-data");
+    let buttonFlex = document.getElementsByClassName("button-flex")[0];
 
-      let childElements = buttonFlex.children;
+    let childElements = buttonFlex.children;
 
-      // 子要素の数だけループ
-      for (let i = 0; i < childElements.length; i++) {
-        let childElement = childElements[i];
-        // 子要素が form タグであれば削除
-        if (childElement.tagName.toLowerCase() === "form") {
-          buttonFlex.removeChild(childElement);
-          break; // 1回削除すれば十分な場合はループを抜ける
-        }
+    // 子要素の数だけループ
+    for (let i = 0; i < childElements.length; i++) {
+      let childElement = childElements[i];
+      // 子要素が form タグであれば削除
+      if (childElement.tagName.toLowerCase() === "form") {
+        buttonFlex.removeChild(childElement);
+        break; // 1回削除すれば十分な場合はループを抜ける
       }
+    }
 
-      let form = document.createElement("form");
-      form.classList.add("expense-form");
-      let baseUrl = "/delete/expense/";
-      form.action = baseUrl + deleteData;
-      form.method = "post";
+    let form = document.createElement("form");
+    form.classList.add("expense-form");
+    let baseUrl = "/delete/expense/";
+    form.action = baseUrl + deleteData;
+    form.method = "post";
 
-      let confirmDeleteBtn = document.createElement("button");
-      confirmDeleteBtn.setAttribute("type", "submit");
-      confirmDeleteBtn.setAttribute("class", "btn btn-danger");
-      confirmDeleteBtn.setAttribute("id", "confirmDeleteBtn");
-      confirmDeleteBtn.textContent = "はい";
+    let confirmDeleteBtn = document.createElement("button");
+    confirmDeleteBtn.setAttribute("type", "submit");
+    confirmDeleteBtn.setAttribute("class", "btn btn-danger");
+    confirmDeleteBtn.setAttribute("id", "confirmDeleteBtn");
+    confirmDeleteBtn.textContent = "はい";
 
-      form.appendChild(confirmDeleteBtn);
-      buttonFlex.appendChild(form);
-      deleteModal.style.display = "block";
+    form.appendChild(confirmDeleteBtn);
+    buttonFlex.appendChild(form);
+    deleteModal.style.display = "block";
   });
 });
 

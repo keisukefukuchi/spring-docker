@@ -132,7 +132,7 @@ class EventCalendarController {
       incomeMap.put("noMessage", "データはありません。");
       result.add(incomeMap);
     }
-    
+
     if (!theDayExpenseDataList.isEmpty()) {
       for (Expense theDayExpenseData : theDayExpenseDataList) {
         Map<String, String> expenseMap = new HashMap<>();

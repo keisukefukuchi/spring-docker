@@ -169,8 +169,8 @@
 
 .batsu::before,
 .batsu::after,
- .edit-batsu::before,
- .edit-batsu::after{
+.edit-batsu::before,
+.edit-batsu::after {
     content: "";
     position: absolute;
     top: 30px;
@@ -183,11 +183,11 @@
 }
 
 .batsu::before,
- .edit-batsu::before{
+.edit-batsu::before {
     transform: translate(-50%, -50%) rotate(45deg);
 }
 
 .batsu::after,
- .edit-batsu::after {
+.edit-batsu::after {
     transform: translate(-50%, -50%) rotate(-45deg);
 }

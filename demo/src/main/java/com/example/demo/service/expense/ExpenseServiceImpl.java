@@ -2,11 +2,10 @@ package com.example.demo.service.expense;
 
 import com.example.demo.entity.Expense;
 import com.example.demo.repository.ExpenseRepository;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
-
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -76,5 +75,4 @@ public class ExpenseServiceImpl implements ExpenseService {
   public void deleteByPaymentTypeId(UUID paymentTypeId) {
     expenseRepository.deleteByPaymentTypeId(paymentTypeId);
   }
-
 }

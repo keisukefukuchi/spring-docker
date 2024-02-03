@@ -167,8 +167,7 @@
 #expenseCategory,
 #paymentType,
 #edit-expenseCategory,
-#edit-paymentType
- {
+#edit-paymentType {
     display: block;
     width: 200px;
     box-sizing: border-box;
@@ -198,7 +197,7 @@
 .batsu::before,
 .batsu::after,
 .edit-batsu::before,
-.edit-batsu::after{
+.edit-batsu::after {
     content: "";
     position: absolute;
     top: 30px;
