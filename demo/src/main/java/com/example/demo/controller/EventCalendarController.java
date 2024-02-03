@@ -129,10 +129,10 @@ class EventCalendarController {
     } else {
       Map<String, String> incomeMap = new HashMap<>();
       incomeMap.put("type", "income");
-      incomeMap.put("theDayIncomeName", "");
-      incomeMap.put("theDayIncomePrice", "");
+      incomeMap.put("noMessage", "データはありません。");
       result.add(incomeMap);
     }
+    
     if (!theDayExpenseDataList.isEmpty()) {
       for (Expense theDayExpenseData : theDayExpenseDataList) {
         Map<String, String> expenseMap = new HashMap<>();
@@ -155,10 +155,7 @@ class EventCalendarController {
     } else {
       Map<String, String> expenseMap = new HashMap<>();
       expenseMap.put("type", "expense");
-      expenseMap.put("theDayExpenseName", "");
-      expenseMap.put("theDayExpensePrice", "");
-      expenseMap.put("theDayExpenseCategory", "");
-      expenseMap.put("theDayExpensePaymentType", "");
+      expenseMap.put("noMessage", "データはありません。");
       result.add(expenseMap);
     }
     return result;

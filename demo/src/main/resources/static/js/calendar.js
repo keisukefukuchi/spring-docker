@@ -63,41 +63,58 @@ document.addEventListener("DOMContentLoaded", function () {
           data.forEach((entry) => {
             if (entry.type === "income") {
               let incomeElement = document.createElement("tr");
-              let nameElement = document.createElement("td");
-              let priceElement = document.createElement("td");
+              if(entry.noMessage) {
+                let noElement = document.createElement("td");
+                noElement.setAttribute("colspan", "2");
+                noElement.style.paddingTop = "30px";
+                noElement.textContent = entry.noMessage;
+                incomeElement.appendChild(noElement);
+              }else {
+                let nameElement = document.createElement("td");
+                let priceElement = document.createElement("td");
 
-              incomeElement.classList.add("income_box");
-              nameElement.classList.add("income-name");
-              priceElement.classList.add("income-price");
+                incomeElement.classList.add("income_box");
+                nameElement.classList.add("income-name");
+                priceElement.classList.add("income-price");
 
-              nameElement.textContent = entry.theDayIncomeName;
-              priceElement.textContent = entry.theDayIncomePrice;
+                nameElement.textContent = entry.theDayIncomeName;
+                priceElement.textContent = entry.theDayIncomePrice + "円";
 
-              incomeElement.appendChild(nameElement);
-              incomeElement.appendChild(priceElement);
+                incomeElement.appendChild(nameElement);
+                incomeElement.appendChild(priceElement);
+              }
+
               incomeTable.appendChild(incomeElement);
             } else if (entry.type === "expense") {
               let expenseElement = document.createElement("tr");
-              let nameElement = document.createElement("td");
-              let priceElement = document.createElement("td");
-              let paymentTypeElement = document.createElement("td");
-              let categoryElement = document.createElement("td");
+              if(entry.noMessage) {
+                let noElement = document.createElement("td");
+                noElement.setAttribute("colspan", "2");
+                noElement.style.paddingTop = "30px";
+                noElement.textContent = entry.noMessage;
+                expenseElement.appendChild(noElement);
+              }else {
+                 let nameElement = document.createElement("td");
+                 let priceElement = document.createElement("td");
+                 let paymentTypeElement = document.createElement("td");
+                 let categoryElement = document.createElement("td");
 
-              expenseElement.classList.add("expense_box");
-              nameElement.classList.add("expense-name");
-              priceElement.classList.add("expense-price");
-              paymentTypeElement.classList.add("expense-payment-type");
-              categoryElement.classList.add("expense-category");
+                 expenseElement.classList.add("expense_box");
+                 nameElement.classList.add("expense-name");
+                 priceElement.classList.add("expense-price");
+                 paymentTypeElement.classList.add("expense-payment-type");
+                 categoryElement.classList.add("expense-category");
 
-              nameElement.textContent = entry.theDayExpenseName;
-              priceElement.textContent = entry.theDayExpensePrice;
-              paymentTypeElement.textContent = entry.theDayExpensePaymentType;
-              categoryElement.textContent = entry.theDayExpenseCategory;
+                 nameElement.textContent = entry.theDayExpenseName;
+                 priceElement.textContent = entry.theDayExpensePrice + "円";
+                 paymentTypeElement.textContent = entry.theDayExpensePaymentType;
+                 categoryElement.textContent = entry.theDayExpenseCategory;
 
-              expenseElement.appendChild(nameElement);
-              expenseElement.appendChild(priceElement);
-              expenseElement.appendChild(paymentTypeElement);
-              expenseElement.appendChild(categoryElement);
+                 expenseElement.appendChild(nameElement);
+                 expenseElement.appendChild(priceElement);
+                 expenseElement.appendChild(paymentTypeElement);
+                 expenseElement.appendChild(categoryElement);
+              }
               expenseTable.appendChild(expenseElement);
             }
           });
