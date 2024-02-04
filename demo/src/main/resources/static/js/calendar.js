@@ -209,5 +209,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function updateAmounts(expenseAmount, incomeAmount) {
     document.getElementById("expenseAmount").textContent = expenseAmount + "円";
     document.getElementById("incomeAmount").textContent = incomeAmount + "円";
+    if(incomeAmount - expenseAmount < 0) {
+        document.getElementById("allAmount").classList.add("minus");
+    }else {
+        document.getElementById("allAmount").classList.add("plus");
+    }
+    document.getElementById("allAmount").textContent = incomeAmount - expenseAmount + "円";
   }
 });

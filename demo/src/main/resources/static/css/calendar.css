@@ -12,7 +12,8 @@
 }
 
 .month-expense,
-.month-income {
+.month-income,
+.month-all {
     display: flex;
     margin: 10px;
     text-align: center;
@@ -28,10 +29,24 @@
     color: green;
 }
 
+#allAmount {
+    margin-left: 10px;
+}
+
+.minus {
+    color: red;
+}
+
+.plus {
+    color: green;
+}
+
 .month-expense h3,
 .month-income h3,
+.month-all h3,
 #expenseAmount,
-#incomeAmount {
+#incomeAmount,
+#allAmount {
     font-size: 24px;
     font-size: bold;
 }
